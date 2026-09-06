@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: Antigravity IDE
+Application-Name: Roseva Skincare
+Specification-Title: Roseva Web Application
+Specification-Version: 1.0

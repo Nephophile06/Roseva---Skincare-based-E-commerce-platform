@@ -1,0 +1,763 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <!DOCTYPE html>
+    <html lang="en" class="scroll-smooth">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Browse Products — Roséva Skincare | Verified Formulas</title>
+        <meta name="description"
+            content="100% disclosed ingredients mapped to target your specific skin concerns with precision. Browse all Roséva botanical formulas.">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Manrope:wght@400;500;600;700&family=Oranienbaum&family=Quicksand:wght@300;400;500;600;700&family=Style+Script&display=swap"
+            rel="stylesheet">
+
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="js/tailwind-config.js"></script>
+
+        <!-- Custom CSS Stylesheet -->
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body
+        class="bg-roseva-bg text-roseva-text antialiased selection:bg-roseva-plum selection:text-white min-h-screen flex flex-col justify-between">
+
+        <!-- ============================================== -->
+        <!-- HEADER / NAVBAR                                -->
+        <!-- ============================================== -->
+        <header
+            class="sticky top-0 z-50 bg-[#FFFAF0]/95 backdrop-blur-md transition-all duration-300 border-b border-[#7A2E47]/10">
+            <div class="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-4 flex items-center justify-between">
+                <!-- Brand Logo -->
+                <a href="index.jsp" class="flex items-center gap-2 group focus:outline-none" aria-label="Roséva Home">
+                    <img src="assets/logo.png" alt="Roséva Brand Logo"
+                        class="h-14 sm:h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+                </a>
+
+                <!-- Desktop Navigation Links (Arapey Font) -->
+                <nav class="hidden md:flex items-center gap-8 lg:gap-12 font-arapey text-lg tracking-wide text-roseva-text"
+                    aria-label="Main Navigation">
+                    <a href="index.jsp"
+                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Home</a>
+                    <a href="journal.jsp"
+                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">The
+                        Journal</a>
+                    <a href="products.jsp"
+                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-100 font-medium">Products</a>
+                    <a href="#wishlist"
+                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Wishlist</a>
+                    <a href="profile.jsp"
+                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Tousif
+                        Tasrik</a>
+                </nav>
+
+                <!-- Cart Action & Mobile Menu Toggle -->
+                <div class="flex items-center gap-4 sm:gap-6">
+                    <a href="cart.jsp"
+                        class="relative p-1 text-roseva-text hover:text-roseva-plum transition-all duration-200 group focus:outline-none flex items-center justify-center"
+                        aria-label="View Shopping Cart">
+                        <img src="assets/cart icon.png" alt="Cart"
+                            class="w-7 sm:w-8 h-7 sm:h-8 object-contain group-hover:scale-110 transition-transform duration-200" />
+                        <span id="cartBadge"
+                            class="absolute -top-1 -right-1 bg-roseva-plum text-white text-[10px] font-manrope font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">3</span>
+                    </a>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobileMenuBtn"
+                        class="md:hidden text-roseva-text hover:text-roseva-plum p-1 focus:outline-none"
+                        aria-label="Open Navigation Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-[#FFFAF0] border-b border-[#7A2E47]/10 px-6 py-5">
+                <div class="flex flex-col gap-4 font-arapey text-xl text-roseva-text">
+                    <a href="index.jsp" class="hover:text-roseva-plum transition-colors">Home</a>
+                    <a href="journal.jsp" class="hover:text-roseva-plum transition-colors">The Journal</a>
+                    <a href="products.jsp" class="text-roseva-plum font-semibold">Products</a>
+                    <a href="#wishlist" class="hover:text-roseva-plum transition-colors">Wishlist</a>
+                    <a href="profile.jsp" class="hover:text-roseva-plum transition-colors">Tousif Tasrik</a>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ============================================== -->
+        <!-- MAIN CONTENT CONTAINER                        -->
+        <!-- ============================================== -->
+        <main class="flex-grow max-w-[1360px] w-full mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12">
+
+            <!-- ============================================== -->
+            <!-- TOP PROMOTIONAL BANNER                         -->
+            <!-- ============================================== -->
+            <section class="mb-10 sm:mb-14">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 py-6 sm:py-10">
+                    <!-- Banner Image Left (Cream Swatches) -->
+                    <div class="w-36 sm:w-48 lg:w-56 flex-shrink-0 flex items-center justify-center">
+                        <img src="assets/banner 1.png" alt="Pure botanical formula texture"
+                            class="w-full h-auto object-contain drop-shadow-sm" />
+                    </div>
+
+                    <!-- Banner Center Text -->
+                    <div class="flex-1 text-center px-4 max-w-xl">
+                        <h1
+                            class="font-oranienbaum text-3xl sm:text-4xl lg:text-5xl text-roseva-plum tracking-normal mb-3">
+                            Verified Formulas
+                        </h1>
+                        <p class="font-quicksand text-sm sm:text-base text-roseva-text/85 leading-relaxed">
+                            100% disclosed ingredients mapped to target your specific skin concerns with precision.
+                        </p>
+                    </div>
+
+                    <!-- Banner Image Right (Hand applying mask bowl) -->
+                    <div class="w-36 sm:w-48 lg:w-56 flex-shrink-0 flex items-center justify-center">
+                        <img src="assets/banner 2.png" alt="Herbal formulation ritual"
+                            class="w-full h-auto object-contain drop-shadow-sm" />
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ============================================== -->
+            <!-- SEARCH, SORT & BREADCRUMB BAR                 -->
+            <!-- ============================================== -->
+            <section class="mb-10 sm:mb-12">
+                <!-- Search & Sort Row -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                    <!-- Search Box -->
+                    <div
+                        class="flex items-center w-full max-w-md border border-[#D5CFC3] rounded-sm bg-white overflow-hidden shadow-sm focus-within:border-roseva-plum transition-colors">
+                        <input type="text" id="productSearchInput" placeholder="Type a Product Name"
+                            class="w-full px-4 py-2 text-sm font-quicksand text-roseva-text placeholder-roseva-text/50 bg-transparent focus:outline-none" />
+                        <button id="searchBtn"
+                            class="bg-roseva-plum hover:bg-[#100C08] text-white px-6 py-2 text-sm font-manrope font-medium transition-colors">
+                            Search
+                        </button>
+                    </div>
+
+                    <!-- Sort Dropdown Trigger -->
+                    <div class="relative flex-shrink-0">
+                        <button id="sortDropdownBtn" type="button"
+                            class="w-full sm:w-48 bg-white border border-[#D5CFC3] px-4 py-2 rounded-sm text-sm font-manrope text-roseva-text/80 flex items-center justify-between gap-3 shadow-sm hover:border-roseva-plum focus:outline-none transition-colors">
+                            <span id="selectedSortLabel">Sort by</span>
+                            <svg class="w-4 h-4 text-roseva-text/60 transition-transform duration-200" id="sortArrow"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- CUSTOM SORT DROPDOWN (Matches Image 3) -->
+                        <div id="sortDropdownMenu"
+                            class="dropdown-menu hidden absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-[#ECE6DC] z-40 overflow-hidden p-2">
+                            <div
+                                class="flex flex-col divide-y divide-[#EFE9E0] text-center font-arapey text-2xl text-roseva-text">
+                                <button type="button" onclick="selectSortOption('Most Popular')"
+                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
+                                    Most Popular
+                                </button>
+                                <button type="button" onclick="selectSortOption('Price: low to high')"
+                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
+                                    Price: low to high
+                                </button>
+                                <button type="button" onclick="selectSortOption('Price: high to low')"
+                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
+                                    Price: high to low
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breadcrumb Navigation -->
+                <nav class="mt-4 font-arapey text-sm sm:text-base text-roseva-text/60 flex items-center gap-2"
+                    aria-label="Breadcrumb">
+                    <a href="index.jsp" class="hover:text-roseva-plum transition-colors">Home</a>
+                    <span>/</span>
+                    <span class="text-roseva-text font-medium">Browse Products</span>
+                    <span>/</span>
+                    <span id="activeCategoryBreadcrumb" class="text-roseva-text/70">Facial Wipes</span>
+                </nav>
+            </section>
+
+
+            <!-- ============================================== -->
+            <!-- MAIN PRODUCT BROWSER (SIDEBAR + GRID)          -->
+            <!-- ============================================== -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+                <!-- SIDEBAR: BROWSE PRODUCTS CATEGORIES -->
+                <aside class="lg:col-span-3">
+                    <div class="bg-transparent">
+                        <h2 class="font-oranienbaum text-2xl sm:text-[28px] text-roseva-plum mb-6 tracking-normal">
+                            Browse Products
+                        </h2>
+
+                        <!-- Category List with Numbers -->
+                        <ul class="space-y-3 font-quicksand text-sm text-roseva-text/85">
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Cleanser</span>
+                                <span class="font-medium text-roseva-text/60">25</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Face Masks</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Sunscreen</span>
+                                <span class="font-medium text-roseva-text/60">10</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Moisturizer</span>
+                                <span class="font-medium text-roseva-text/60">42</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Facewash</span>
+                                <span class="font-medium text-roseva-text/60">35</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Serum</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Lip Balm</span>
+                                <span class="font-medium text-roseva-text/60">10</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer text-roseva-plum font-semibold py-0.5">
+                                <span>Facial Wipes</span>
+                                <span class="font-medium text-roseva-plum">42</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Spot Remover</span>
+                                <span class="font-medium text-roseva-text/60">35</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Scrubs &amp; Exfoliators</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Cleanser</span>
+                                <span class="font-medium text-roseva-text/60">25</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Face Masks</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Sunscreen</span>
+                                <span class="font-medium text-roseva-text/60">10</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Moisturizer</span>
+                                <span class="font-medium text-roseva-text/60">42</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Facewash</span>
+                                <span class="font-medium text-roseva-text/60">35</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Serum</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Lip Balm</span>
+                                <span class="font-medium text-roseva-text/60">10</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Facial Wipes</span>
+                                <span class="font-medium text-roseva-text/60">42</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Spot Remover</span>
+                                <span class="font-medium text-roseva-text/60">35</span>
+                            </li>
+                            <li
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Scrubs &amp; Exfoliators</span>
+                                <span class="font-medium text-roseva-text/60">60</span>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+
+                <!-- RIGHT SECTION: 12 PRODUCT GRID -->
+                <div class="lg:col-span-9">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                        <!-- Product 1: Roséva Hydro-Boost -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Hydro-Boost</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
+                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 2: Roséva Glow Restore -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Glow Restore</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
+                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 3: Roséva Skin Renewal -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Skin Renewal</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
+                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 4: Roséva Glow Restore -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Glow Restore</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
+                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 5: Roséva Skin Renewal -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Skin Renewal</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
+                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 6: Roséva Hydro-Boost -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Hydro-Boost</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
+                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 7: Roséva Hydro-Boost -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Hydro-Boost</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
+                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 8: Roséva Glow Restore -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Glow Restore</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
+                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 9: Roséva Skin Renewal -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Skin Renewal</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
+                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 10: Roséva Glow Restore -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Glow Restore</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
+                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 11: Roséva Skin Renewal -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Skin Renewal</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
+                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product 12: Roséva Hydro-Boost -->
+                        <div
+                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                            <div
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
+                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                    Roséva Hydro-Boost</h3>
+                                <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
+                                <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
+                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                    class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
+                                    See Details <span class="ml-1 text-sm font-light">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ============================================== -->
+                    <!-- PAGINATION & GO TO DROPDOWN SECTION            -->
+                    <!-- ============================================== -->
+                    <div
+                        class="mt-12 pt-6 border-t border-[#EAE2D5] flex flex-wrap items-center justify-between gap-4 font-quicksand text-xs sm:text-sm text-roseva-text/80">
+
+                        <!-- Left: Total Items Count -->
+                        <div class="font-manrope text-xs sm:text-sm text-roseva-text/70">
+                            Total 48 items
+                        </div>
+
+                        <!-- Center: Pagination Buttons -->
+                        <div class="flex items-center gap-1 sm:gap-1.5 font-manrope">
+                            <!-- Prev Arrow -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                &lt;
+                            </button>
+                            <!-- Page 1 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                1
+                            </button>
+                            <!-- Ellipsis -->
+                            <span class="w-6 sm:w-7 text-center text-roseva-text/50">...</span>
+                            <!-- Page 4 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                4
+                            </button>
+                            <!-- Page 5 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                5
+                            </button>
+                            <!-- Page 6 (Active) -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-roseva-plum bg-roseva-plum text-white font-semibold rounded-sm shadow-sm">
+                                6
+                            </button>
+                            <!-- Page 7 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                7
+                            </button>
+                            <!-- Page 8 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                8
+                            </button>
+                            <!-- Ellipsis -->
+                            <span class="w-6 sm:w-7 text-center text-roseva-text/50">...</span>
+                            <!-- Page 20 -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                20
+                            </button>
+                            <!-- Next Arrow -->
+                            <button
+                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
+                                &gt;
+                            </button>
+                        </div>
+
+                        <!-- Right: Go to Page Selector (Matches Image 2) -->
+                        <div class="flex items-center gap-2 relative">
+                            <span class="font-manrope text-xs text-roseva-text/70">Go to</span>
+                            <div class="relative">
+                                <button id="pageDropdownBtn" type="button"
+                                    class="bg-white border border-[#D5CFC3] rounded-sm px-2.5 py-1 text-xs font-manrope flex items-center gap-2 hover:border-roseva-plum focus:outline-none transition-colors shadow-sm">
+                                    <span id="selectedPageLabel">10 / page</span>
+                                    <svg class="w-3.5 h-3.5 text-roseva-text/60 transition-transform duration-200"
+                                        id="pageArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <!-- CUSTOM SORT DROPDOWN PAGE (Matches Image 2) -->
+                                <div id="pageDropdownMenu"
+                                    class="dropdown-menu hidden absolute right-0 bottom-full mb-2 w-28 bg-white rounded-2xl shadow-2xl border border-[#ECE6DC] z-40 overflow-hidden py-2">
+                                    <div
+                                        class="max-h-72 overflow-y-auto no-scrollbar divide-y divide-[#EFE9E0] text-center font-manrope text-xl text-roseva-text font-normal">
+                                        <button type="button" onclick="selectPageOption('01')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">01</button>
+                                        <button type="button" onclick="selectPageOption('02')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">02</button>
+                                        <button type="button" onclick="selectPageOption('03')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">03</button>
+                                        <button type="button" onclick="selectPageOption('04')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">04</button>
+                                        <button type="button" onclick="selectPageOption('05')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">05</button>
+                                        <button type="button" onclick="selectPageOption('06')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">06</button>
+                                        <button type="button" onclick="selectPageOption('07')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">07</button>
+                                        <button type="button" onclick="selectPageOption('08')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">08</button>
+                                        <button type="button" onclick="selectPageOption('09')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">09</button>
+                                        <button type="button" onclick="selectPageOption('10')"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">10</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- ============================================== -->
+        <!-- FOOTER SECTION                                 -->
+        <!-- ============================================== -->
+        <footer class="bg-roseva-footer text-roseva-text pt-16 pb-12 mt-16 border-t border-[#7A2E47]/10">
+            <div class="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
+
+                <!-- Footer Brand: Roseva in Style Script -->
+                <div class="mb-10">
+                    <a href="index.jsp" class="inline-block focus:outline-none" aria-label="Roséva Brand">
+                        <span
+                            class="font-stylescript text-5xl sm:text-6xl text-roseva-plum tracking-wide hover:opacity-90 transition-opacity">
+                            Roséva
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Footer Columns in Arapey Font (3 evenly-spaced columns) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 font-arapey text-lg text-roseva-text/90">
+
+                    <!-- Column 1: Flagship Store Address (Left) -->
+                    <div class="flex flex-col gap-2 md:justify-self-start">
+                        <div class="flex items-start gap-2.5">
+                            <span class="text-roseva-plum text-xl leading-none mt-0.5">📍</span>
+                            <div class="leading-relaxed">
+                                <span class="font-medium text-roseva-text block">Flagship Store</span>
+                                <span>45/A, Banani Avenue, Road 11</span><br>
+                                <span>Banani, Dhaka-1213, Bangladesh</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Quick Links / Care (Centered in Middle between Col 1 and Col 3) -->
+                    <div class="flex flex-col gap-2.5 md:justify-self-center">
+                        <a href="#store-locator" class="hover:text-roseva-plum transition-colors inline-block">Store
+                            Locator</a>
+                        <a href="#dermatologist" class="hover:text-roseva-plum transition-colors inline-block">Book a
+                            Dermatologist</a>
+                        <a href="#quiz" class="hover:text-roseva-plum transition-colors inline-block">Skin Quiz &amp;
+                            Consultation</a>
+                    </div>
+
+                    <!-- Column 3: Customer Care & Policies (Shifted slightly left) -->
+                    <div class="flex flex-col gap-2.5 md:justify-self-center">
+                        <a href="#support" class="hover:text-roseva-plum transition-colors inline-block">Contact
+                            Support</a>
+                        <a href="#shipping" class="hover:text-roseva-plum transition-colors inline-block">Shipping &amp;
+                            Returns</a>
+                        <a href="#terms" class="hover:text-roseva-plum transition-colors inline-block">Terms &amp;
+                            Conditions</a>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Divider & Copyright Note -->
+                <div
+                    class="mt-12 pt-6 border-t border-roseva-text/15 flex flex-col sm:flex-row items-center justify-between gap-4 font-arapey text-base text-roseva-text/75">
+                    <p>&copy; <%= java.time.Year.now().getValue() %> Roséva Skincare. All rights reserved.</p>
+                    <div class="flex gap-6 font-manrope text-xs tracking-wider uppercase text-roseva-text/70">
+                        <a href="#privacy" class="hover:text-roseva-plum transition-colors">Privacy</a>
+                        <span>•</span>
+                        <a href="#cookies" class="hover:text-roseva-plum transition-colors">Cookies</a>
+                        <span>•</span>
+                        <a href="#sustainability" class="hover:text-roseva-plum transition-colors">Sustainability</a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+
+        <!-- External JS Logic -->
+        <script src="js/main.js"></script>
+    </body>
+
+    </html>

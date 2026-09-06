@@ -1,0 +1,86 @@
+# ==============================================================================
+# Roséva Skincare (.gitignore)
+# Java Dynamic Web Project (JSP / Servlet / Apache Tomcat / Oracle DB)
+# ==============================================================================
+
+# Compiled Java Bytecode & Build Artifacts
+*.class
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Build Output Directories
+/target/
+/build/
+/dist/
+/out/
+/bin/
+WEB-INF/classes/
+WEB-INF/deploy/
+
+# Java Temporary & Crash Logs
+*.log
+logs/
+catalina.out
+hs_err_pid*
+replay_pid*
+
+# Server Work & Temp Directories (Tomcat / Jetty / GlassFish)
+/work/
+/temp/
+.tomcatplugin
+
+# Eclipse IDE Configuration
+.metadata/
+.settings/
+.project
+.classpath
+.apt_generated/
+.apt_generated_tests/
+*.launch
+
+# IntelliJ IDEA Configuration
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# NetBeans IDE Configuration
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+
+# Visual Studio Code Configuration
+.vscode/
+*.code-workspace
+
+# Sensitive Environment & DB Configurations
+.env
+.env.local
+.env.production
+db.properties
+database.properties
+*.secret
+*.pem
+*.key
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Backup & Scratch Files
+*.bak
+*.tmp
+*.swp
+*~
