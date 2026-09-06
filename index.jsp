@@ -99,39 +99,40 @@
                 class="relative bg-gradient-to-r from-[#FFFAF0] via-[#FAF0E6] to-[#F5E6DC] overflow-hidden border-b border-[#7A2E47]/10 h-[320px] sm:h-[550px] lg:h-[570px] flex items-center">
                 <div class="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch h-full">
 
-                    <!-- Hero Left: Content -->
+                    <!-- Hero Left: Content (Enlarged Fonts) -->
                     <div
-                        class="lg:col-span-6 px-6 sm:px-12 lg:pl-[max(1.5rem,calc((100vw-1360px)/2+2.5rem))] lg:pr-10 py-6 lg:py-8 flex flex-col justify-center z-10 h-full">
+                        class="lg:col-span-6 px-6 sm:px-12 lg:pl-[max(1.5rem,calc((100vw-1360px)/2+2.5rem))] lg:pr-10 py-8 lg:py-10 flex flex-col justify-center z-10 h-full">
                         <h1
-                            class="font-oranienbaum text-2xl sm:text-3xl lg:text-[38px] leading-[1.15] text-roseva-plum mb-3 tracking-tight">
+                            class="font-oranienbaum text-3xl sm:text-4xl lg:text-[46px] leading-[1.15] text-roseva-plum mb-4 tracking-tight">
                             The Proof is<br>in Your Reflection
                         </h1>
                         <p
-                            class="font-quicksand text-xs sm:text-sm text-roseva-text/85 max-w-lg mb-5 leading-relaxed font-normal">
+                            class="font-quicksand text-sm sm:text-base text-roseva-text/85 max-w-lg mb-6 leading-relaxed font-normal">
                             Know exactly what you applying to your skin with zero misleading fluff. Every <span
                                 class="text-roseva-plum font-semibold">Roséva</span> essential formula has full
                             ingredient transparency & verified safety standards.
                         </p>
                         <div>
                             <a href="#products"
-                                class="inline-flex items-center justify-center font-manrope font-semibold text-xs sm:text-sm tracking-wide bg-roseva-plum hover:bg-[#100C08] text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                                class="inline-flex items-center justify-center font-manrope font-semibold text-sm sm:text-base tracking-wide bg-roseva-plum hover:bg-[#100C08] text-white px-7 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
                                 Shop Now
                             </a>
                         </div>
                     </div>
 
                     <!-- Hero Right: Dynamic Visual Artistry -->
-                    <div class="hidden lg:block lg:col-span-6 relative h-full overflow-hidden">
-                        <div class="absolute inset-0 w-full h-full flex items-stretch">
-                            <!-- Swirling Cream Texture Component -->
-                            <div class="w-1/2 h-full relative overflow-hidden">
+                    <div class="hidden lg:block lg:col-span-6 relative h-full">
+                        <div class="absolute inset-0 w-full h-full flex items-stretch justify-end">
+                            <!-- Swirling Cream Texture Component (Behind / Background Layer) -->
+                            <div
+                                class="w-7/12 h-full relative flex items-center justify-end -mr-24 z-0 pointer-events-none">
                                 <img src="assets/banner ingredient.png" alt="Pure botanical cream texture"
-                                    class="w-full h-full object-cover object-center transform scale-105 filter brightness-102" />
+                                    class="w-full h-full object-contain object-right filter brightness-102" />
                             </div>
-                            <!-- Radiant Face Model Component (Flush to the extreme right edge) -->
-                            <div class="w-1/2 h-full relative overflow-hidden">
+                            <!-- Radiant Face Model Component -->
+                            <div class="w-7/12 h-full relative overflow-hidden z-20">
                                 <img src="assets/banner face.png" alt="Radiant skin model reflection"
-                                    class="w-full h-full object-cover object-top filter brightness-100 contrast-102" />
+                                    class="w-full h-full object-cover object-top filter brightness-100 contrast-102 transform scale-70 origin-top" />
                             </div>
                         </div>
                     </div>
