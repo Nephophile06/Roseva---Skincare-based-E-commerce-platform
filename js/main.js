@@ -470,6 +470,34 @@ function addToCart(productName, price) {
     }
 }
 
+// Card Quantity Stepper & Direct Add-to-Cart helpers
+function decrementCardQty(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        let val = parseInt(el.innerText, 10) || 1;
+        if (val > 1) {
+            el.innerText = val - 1;
+        }
+    }
+}
+
+function incrementCardQty(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        let val = parseInt(el.innerText, 10) || 1;
+        el.innerText = val + 1;
+    }
+}
+
+function addCardToCart(name, price, qtyId) {
+    const el = document.getElementById(qtyId);
+    const qty = el ? parseInt(el.innerText, 10) || 1 : 1;
+    for (let i = 0; i < qty; i++) {
+        addToCart(name, price);
+    }
+    showAuthToast(`Added ${qty} × ${name} to cart!`);
+}
+
 // ==========================================
 // CUSTOM DROPDOWNS LOGIC (Sort & Page Size)
 // ==========================================

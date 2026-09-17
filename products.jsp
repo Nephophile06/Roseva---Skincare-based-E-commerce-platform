@@ -341,252 +341,828 @@
                         <!-- Product 1: Roséva Hydro-Boost -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty1'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty1"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty1'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Hydro-Boost', 20, 'cardQty1'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Hydro-Boost</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Hydro-Boost</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
-                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 2: Roséva Glow Restore -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty2'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty2"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty2'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Glow Restore', 35, 'cardQty2'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Glow Restore</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Glow Restore</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
-                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 3: Roséva Skin Renewal -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty3'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty3"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty3'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Skin Renewal', 40, 'cardQty3'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Skin Renewal</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Skin Renewal</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
-                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 4: Roséva Glow Restore -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty4'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty4"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty4'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Glow Restore', 35, 'cardQty4'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Glow Restore</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Glow Restore</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
-                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 5: Roséva Skin Renewal -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty5'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty5"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty5'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Skin Renewal', 40, 'cardQty5'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Skin Renewal</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Skin Renewal</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
-                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 6: Roséva Hydro-Boost -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty6'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty6"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty6'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Hydro-Boost', 20, 'cardQty6'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Hydro-Boost</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Hydro-Boost</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
-                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 7: Roséva Hydro-Boost -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty7'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty7"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty7'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Hydro-Boost', 20, 'cardQty7'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Hydro-Boost</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Hydro-Boost</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
-                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 8: Roséva Glow Restore -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty8'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty8"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty8'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Glow Restore', 35, 'cardQty8'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Glow Restore</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Glow Restore</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
-                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 9: Roséva Skin Renewal -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty9'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty9"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty9'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Skin Renewal', 40, 'cardQty9'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Skin Renewal</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Skin Renewal</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
-                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 10: Roséva Glow Restore -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/glow restore.png" alt="Roséva Glow Restore"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/glow restore.png" alt="Roséva Glow Restore"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty10'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty10"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty10'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Glow Restore', 35, 'cardQty10'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Glow Restore</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Glow Restore</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Lotion</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$35</p>
-                                <button onclick="addToCart('Roséva Glow Restore', 35)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 11: Roséva Skin Renewal -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/skin renewal.png" alt="Roséva Skin Renewal"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty11'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty11"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty11'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Skin Renewal', 40, 'cardQty11'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Skin Renewal</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Skin Renewal</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Anti-aging Serum</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$40</p>
-                                <button onclick="addToCart('Roséva Skin Renewal', 40)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Product 12: Roséva Hydro-Boost -->
                         <div
                             class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+
+                            <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
-                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 flex items-center justify-center">
-                                <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
-                                    class="w-full h-full object-cover img-zoom" loading="lazy">
+                                class="aspect-square w-full rounded overflow-hidden bg-[#F7F3EC] mb-4 relative flex items-center justify-center">
+                                <a href="product-detail.jsp" class="w-full h-full block">
+                                    <img src="assets/hydro boost.png" alt="Roséva Hydro-Boost"
+                                        class="w-full h-full object-cover img-zoom" loading="lazy">
+                                </a>
+
+                                <!-- Real Frosted Glass Overlay on Hover -->
+                                <div
+                                    class="absolute inset-0 bg-white/25 backdrop-blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                </div>
+
+                                <!-- Down Right Corner Controls (Quantity Stepper + Icon-Only Add to Cart) -->
+                                <div
+                                    class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 flex items-center gap-1.5 z-10">
+
+                                    <!-- Compact Glass Stepper -->
+                                    <div
+                                        class="flex items-center bg-white/90 backdrop-blur-md border border-[#7A2E47]/20 rounded-lg px-1 py-0.5 shadow-md">
+                                        <button type="button"
+                                            onclick="decrementCardQty('cardQty12'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Decrease quantity">
+                                            −
+                                        </button>
+                                        <span id="cardQty12"
+                                            class="px-1.5 text-xs font-manrope font-bold text-roseva-plum min-w-[18px] text-center select-none">1</span>
+                                        <button type="button"
+                                            onclick="incrementCardQty('cardQty12'); event.stopPropagation();"
+                                            class="w-6 h-6 flex items-center justify-center rounded text-roseva-text hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none text-xs font-bold active:scale-90"
+                                            aria-label="Increase quantity">
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <!-- Icon-Only Add to Cart Button -->
+                                    <button type="button"
+                                        onclick="addCardToCart('Roséva Hydro-Boost', 20, 'cardQty12'); event.stopPropagation();"
+                                        class="w-8 h-8 rounded-lg bg-roseva-plum hover:bg-[#100C08] text-white shadow-md hover:shadow-lg flex items-center justify-center transition-all active:scale-95 focus:outline-none flex-shrink-0"
+                                        title="Add to Cart" aria-label="Add to Cart">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+
+                            <!-- Bottom Details (Clean Original Layout) -->
                             <div>
-                                <h3
-                                    class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
-                                    Roséva Hydro-Boost</h3>
+                                <a href="product-detail.jsp" class="block">
+                                    <h3
+                                        class="font-oranienbaum text-lg text-roseva-text group-hover:text-roseva-plum transition-colors font-medium">
+                                        Roséva Hydro-Boost</h3>
+                                </a>
                                 <p class="font-quicksand text-xs text-roseva-text/60 mt-0.5">Moisturizer</p>
                                 <p class="font-quicksand font-bold text-base text-roseva-text mt-2">$20</p>
-                                <button onclick="addToCart('Roséva Hydro-Boost', 20)"
+                                <a href="product-detail.jsp"
                                     class="inline-flex items-center text-xs font-manrope text-roseva-text/80 hover:text-roseva-plum font-semibold mt-3 transition-colors group-hover:translate-x-1 duration-200">
                                     See Details <span class="ml-1 text-sm font-light">→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
