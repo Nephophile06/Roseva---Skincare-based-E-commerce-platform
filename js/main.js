@@ -460,8 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Shopping Cart Notification feedback
 let cartCount = 0;
-function addToCart(productName, price) {
-    cartCount++;
+function addToCart(productName, price, quantity = 1) {
+    const qty = typeof quantity === 'number' && quantity > 0 ? quantity : 1;
+    cartCount += qty;
     const badge = document.getElementById('cartBadge');
     if (badge) {
         badge.innerText = cartCount;
