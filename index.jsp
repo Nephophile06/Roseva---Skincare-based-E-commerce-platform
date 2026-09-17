@@ -48,11 +48,12 @@
                         Journal</a>
                     <a href="products.jsp"
                         class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Products</a>
-                    <a href="#wishlist"
-                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Wishlist</a>
-                    <a href="profile.jsp"
-                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Tousif
-                        Tasrik</a>
+                    <div id="navAuthDesktop" class="relative">
+                        <button type="button" onclick="openAuthModal('login')"
+                            class="relative py-1 font-arapey text-lg tracking-wide text-roseva-text hover:text-roseva-plum transition-colors after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform cursor-pointer flex items-center gap-1.5 focus:outline-none">
+                            <span>Login / Sign Up</span>
+                        </button>
+                    </div>
                 </nav>
 
                 <!-- Cart Action & Mobile Menu Toggle -->
@@ -84,8 +85,12 @@
                     <a href="index.jsp" class="hover:text-roseva-plum transition-colors">Home</a>
                     <a href="journal.jsp" class="hover:text-roseva-plum transition-colors">The Journal</a>
                     <a href="products.jsp" class="hover:text-roseva-plum transition-colors">Products</a>
-                    <a href="#wishlist" class="hover:text-roseva-plum transition-colors">Wishlist</a>
-                    <a href="#auth" class="hover:text-roseva-plum transition-colors">Login/Signup</a>
+                    <div id="navAuthMobile">
+                        <button type="button" onclick="openAuthModal('login')"
+                            class="text-left hover:text-roseva-plum transition-colors focus:outline-none">
+                            Login / Sign Up
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>

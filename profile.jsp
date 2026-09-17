@@ -49,11 +49,12 @@
                         Journal</a>
                     <a href="products.jsp"
                         class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Products</a>
-                    <a href="#wishlist"
-                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform">Wishlist</a>
-                    <a href="profile.jsp"
-                        class="relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-100 font-medium">Tousif
-                        Tasrik</a>
+                    <div id="navAuthDesktop" class="relative">
+                        <button type="button" onclick="openAuthModal('login')"
+                            class="relative py-1 font-arapey text-lg tracking-wide text-roseva-text hover:text-roseva-plum transition-colors after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-roseva-plum after:scale-x-0 hover:after:scale-x-100 after:transition-transform cursor-pointer flex items-center gap-1.5 focus:outline-none">
+                            <span>Login / Sign Up</span>
+                        </button>
+                    </div>
                 </nav>
 
                 <!-- Cart Action & Mobile Menu Toggle -->
@@ -85,8 +86,12 @@
                     <a href="index.jsp" class="hover:text-roseva-plum transition-colors">Home</a>
                     <a href="journal.jsp" class="hover:text-roseva-plum transition-colors">The Journal</a>
                     <a href="products.jsp" class="hover:text-roseva-plum transition-colors">Products</a>
-                    <a href="#wishlist" class="hover:text-roseva-plum transition-colors">Wishlist</a>
-                    <a href="profile.jsp" class="text-roseva-plum font-semibold">Tousif Tasrik</a>
+                    <div id="navAuthMobile">
+                        <button type="button" onclick="openAuthModal('login')"
+                            class="text-left hover:text-roseva-plum transition-colors focus:outline-none">
+                            Login / Sign Up
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -107,7 +112,8 @@
 
             <!-- Welcome Greeting Banner -->
             <div class="mb-10">
-                <h1 class="font-oranienbaum text-3xl sm:text-4xl lg:text-[44px] text-roseva-plum tracking-normal mb-2">
+                <h1 id="profileGreetingName"
+                    class="font-oranienbaum text-3xl sm:text-4xl lg:text-[44px] text-roseva-plum tracking-normal mb-2">
                     Hello, Tousif Tasrik!
                 </h1>
                 <p class="font-quicksand text-base sm:text-lg text-roseva-text/85">
@@ -129,14 +135,14 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-roseva-text/80 mb-1.5">Name:</label>
-                        <input type="text" value="Your Full Name"
+                        <input type="text" id="profileInputName" value="Tousif Tasrik"
                             class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
                     </div>
 
                     <!-- Email -->
                     <div>
                         <label class="block text-roseva-text/80 mb-1.5">Email:</label>
-                        <input type="email" value="Your Email"
+                        <input type="email" id="profileInputEmail" value="tousif.tasrik@roseva.com"
                             class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
                     </div>
 
