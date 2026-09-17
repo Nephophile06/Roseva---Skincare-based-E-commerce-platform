@@ -105,29 +105,33 @@
             <!-- ============================================== -->
             <!-- TOP PROMOTIONAL BANNER                         -->
             <!-- ============================================== -->
-            <section class="mb-10 sm:mb-14">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 py-6 sm:py-10">
+            <section class="mb-6 sm:mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 py-4 sm:py-6">
+
                     <!-- Banner Image Left (Cream Swatches) -->
-                    <div class="w-36 sm:w-48 lg:w-56 flex-shrink-0 flex items-center justify-center">
-                        <img src="assets/banner 1.png" alt="Pure botanical formula texture"
-                            class="w-full h-auto object-contain drop-shadow-sm" />
+                    <div
+                        class="w-32 sm:w-40 lg:w-48 h-32 sm:h-40 lg:h-48 flex-shrink-0 flex items-center justify-center">
+                        <img src="assets/banner 2.png" alt="Pure botanical formula texture"
+                            class="max-w-full max-h-full object-contain drop-shadow-sm" />
                     </div>
 
                     <!-- Banner Center Text -->
                     <div class="flex-1 text-center px-4 max-w-xl">
                         <h1
-                            class="font-oranienbaum text-3xl sm:text-4xl lg:text-5xl text-roseva-plum tracking-normal mb-3">
+                            class="font-oranienbaum text-3xl sm:text-4xl lg:text-5xl text-roseva-plum tracking-normal mb-2 sm:mb-3">
                             Verified Formulas
                         </h1>
                         <p class="font-quicksand text-sm sm:text-base text-roseva-text/85 leading-relaxed">
-                            100% disclosed ingredients mapped to target your specific skin concerns with precision.
+                            100% disclosed ingredients mapped to target<br class="hidden sm:block">your specific skin
+                            concerns with precision.
                         </p>
                     </div>
 
                     <!-- Banner Image Right (Hand applying mask bowl) -->
-                    <div class="w-36 sm:w-48 lg:w-56 flex-shrink-0 flex items-center justify-center">
-                        <img src="assets/banner 2.png" alt="Herbal formulation ritual"
-                            class="w-full h-auto object-contain drop-shadow-sm" />
+                    <div
+                        class="w-32 sm:w-40 lg:w-48 h-32 sm:h-40 lg:h-48 flex-shrink-0 flex items-center justify-center">
+                        <img src="assets/banner 1.png" alt="Herbal formulation ritual"
+                            class="max-w-full max-h-full object-contain drop-shadow-sm" />
                     </div>
                 </div>
             </section>
@@ -136,56 +140,9 @@
             <!-- ============================================== -->
             <!-- SEARCH, SORT & BREADCRUMB BAR                 -->
             <!-- ============================================== -->
-            <section class="mb-10 sm:mb-12">
-                <!-- Search & Sort Row -->
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                    <!-- Search Box -->
-                    <div
-                        class="flex items-center w-full max-w-md border border-[#D5CFC3] rounded-sm bg-white overflow-hidden shadow-sm focus-within:border-roseva-plum transition-colors">
-                        <input type="text" id="productSearchInput" placeholder="Type a Product Name"
-                            class="w-full px-4 py-2 text-sm font-quicksand text-roseva-text placeholder-roseva-text/50 bg-transparent focus:outline-none" />
-                        <button id="searchBtn"
-                            class="bg-roseva-plum hover:bg-[#100C08] text-white px-6 py-2 text-sm font-manrope font-medium transition-colors">
-                            Search
-                        </button>
-                    </div>
-
-                    <!-- Sort Dropdown Trigger -->
-                    <div class="relative flex-shrink-0">
-                        <button id="sortDropdownBtn" type="button"
-                            class="w-full sm:w-48 bg-white border border-[#D5CFC3] px-4 py-2 rounded-sm text-sm font-manrope text-roseva-text/80 flex items-center justify-between gap-3 shadow-sm hover:border-roseva-plum focus:outline-none transition-colors">
-                            <span id="selectedSortLabel">Sort by</span>
-                            <svg class="w-4 h-4 text-roseva-text/60 transition-transform duration-200" id="sortArrow"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-
-                        <!-- CUSTOM SORT DROPDOWN (Matches Image 3) -->
-                        <div id="sortDropdownMenu"
-                            class="dropdown-menu hidden absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-[#ECE6DC] z-40 overflow-hidden p-2">
-                            <div
-                                class="flex flex-col divide-y divide-[#EFE9E0] text-center font-arapey text-2xl text-roseva-text">
-                                <button type="button" onclick="selectSortOption('Most Popular')"
-                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
-                                    Most Popular
-                                </button>
-                                <button type="button" onclick="selectSortOption('Price: low to high')"
-                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
-                                    Price: low to high
-                                </button>
-                                <button type="button" onclick="selectSortOption('Price: high to low')"
-                                    class="py-3.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">
-                                    Price: high to low
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <section class="mb-8 sm:mb-10">
                 <!-- Breadcrumb Navigation -->
-                <nav class="mt-4 font-arapey text-sm sm:text-base text-roseva-text/60 flex items-center gap-2"
+                <nav class="mb-5 font-arapey text-sm sm:text-base text-roseva-text/60 flex items-center gap-2"
                     aria-label="Breadcrumb">
                     <a href="index.jsp" class="hover:text-roseva-plum transition-colors">Home</a>
                     <span>/</span>
@@ -193,6 +150,68 @@
                     <span>/</span>
                     <span id="activeCategoryBreadcrumb" class="text-roseva-text/70">Facial Wipes</span>
                 </nav>
+
+                <!-- Search & Sort Row -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+
+                    <!-- Option matching #2: Unified Sleek Search Bar -->
+                    <div
+                        class="flex items-center w-full sm:max-w-md lg:max-w-lg border border-[#D5CFC3] rounded-lg bg-white px-4 py-2.5 focus-within:border-roseva-plum focus-within:ring-1 focus-within:ring-roseva-plum/20 transition-all shadow-sm">
+
+                        <!-- Search Icon (Left) -->
+                        <svg class="w-5 h-5 text-roseva-text/40 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+
+                        <!-- Input Field -->
+                        <input type="text" id="productSearchInput" placeholder="Search..."
+                            class="w-full px-3 text-sm font-quicksand text-roseva-text placeholder-roseva-text/40 bg-transparent focus:outline-none" />
+
+                        <!-- Mic Icon (Right) -->
+                        <button type="button"
+                            class="text-roseva-text/40 hover:text-roseva-plum focus:outline-none transition-colors flex-shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Sort Dropdown Trigger (Height aligned with search box) -->
+                    <div class="relative flex-shrink-0">
+                        <button id="sortDropdownBtn" type="button"
+                            class="w-full sm:w-48 bg-white border border-[#D5CFC3] px-4 py-2.5 rounded-lg text-sm font-manrope text-roseva-text/80 flex items-center justify-between gap-2.5 shadow-sm hover:border-roseva-plum focus:outline-none transition-colors">
+                            <span id="selectedSortLabel" class="font-medium text-roseva-text/90">Sort by</span>
+                            <svg class="w-4 h-4 text-roseva-text/60 transition-transform duration-200" id="sortArrow"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- CUSTOM SORT DROPDOWN (Balanced Ratio) -->
+                        <div id="sortDropdownMenu"
+                            class="dropdown-menu hidden absolute right-0 mt-1.5 w-48 bg-[#FFFAF0] rounded-xl shadow-xl border border-[#7A2E47]/15 z-40 overflow-hidden py-1 backdrop-blur-md">
+                            <div class="flex flex-col font-manrope text-sm text-roseva-text">
+                                <button type="button" onclick="selectSortOption('Most Popular')"
+                                    class="px-4 py-2.5 hover:bg-[#7A2E47]/10 hover:text-roseva-plum transition-colors text-left focus:outline-none font-medium">
+                                    Most Popular
+                                </button>
+                                <button type="button" onclick="selectSortOption('Price: low to high')"
+                                    class="px-4 py-2.5 hover:bg-[#7A2E47]/10 hover:text-roseva-plum transition-colors text-left focus:outline-none border-t border-[#7A2E47]/10 font-medium">
+                                    Price: low to high
+                                </button>
+                                <button type="button" onclick="selectSortOption('Price: high to low')"
+                                    class="px-4 py-2.5 hover:bg-[#7A2E47]/10 hover:text-roseva-plum transition-colors text-left focus:outline-none border-t border-[#7A2E47]/10 font-medium">
+                                    Price: high to low
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
 
@@ -578,105 +597,68 @@
                     <!-- PAGINATION & GO TO DROPDOWN SECTION            -->
                     <!-- ============================================== -->
                     <div
-                        class="mt-12 pt-6 border-t border-[#EAE2D5] flex flex-wrap items-center justify-between gap-4 font-quicksand text-xs sm:text-sm text-roseva-text/80">
+                        class="mt-12 pt-6 border-t border-[#EAE2D5] flex flex-wrap items-center justify-between gap-5 font-quicksand text-sm text-roseva-text/80">
 
                         <!-- Left: Total Items Count -->
-                        <div class="font-manrope text-xs sm:text-sm text-roseva-text/70">
-                            Total 48 items
+                        <div class="font-manrope text-sm text-roseva-text/70 font-medium">
+                            Total <span class="font-semibold text-roseva-text">48</span> items
                         </div>
 
-                        <!-- Center: Pagination Buttons -->
-                        <div class="flex items-center gap-1 sm:gap-1.5 font-manrope">
-                            <!-- Prev Arrow -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                &lt;
-                            </button>
-                            <!-- Page 1 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                1
-                            </button>
-                            <!-- Ellipsis -->
-                            <span class="w-6 sm:w-7 text-center text-roseva-text/50">...</span>
-                            <!-- Page 4 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                4
-                            </button>
-                            <!-- Page 5 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                5
-                            </button>
-                            <!-- Page 6 (Active) -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-roseva-plum bg-roseva-plum text-white font-semibold rounded-sm shadow-sm">
-                                6
-                            </button>
-                            <!-- Page 7 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                7
-                            </button>
-                            <!-- Page 8 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                8
-                            </button>
-                            <!-- Ellipsis -->
-                            <span class="w-6 sm:w-7 text-center text-roseva-text/50">...</span>
-                            <!-- Page 20 -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                20
-                            </button>
-                            <!-- Next Arrow -->
-                            <button
-                                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-[#D5CFC3] rounded-sm bg-white hover:border-roseva-plum hover:text-roseva-plum transition-colors">
-                                &gt;
-                            </button>
+                        <!-- Center: Dynamic Pagination Buttons -->
+                        <div id="paginationButtons"
+                            class="flex items-center gap-1.5 sm:gap-2 font-manrope text-xs sm:text-sm">
+                            <!-- Populated dynamically by renderPagination() in main.js -->
                         </div>
 
-                        <!-- Right: Go to Page Selector (Matches Image 2) -->
-                        <div class="flex items-center gap-2 relative">
-                            <span class="font-manrope text-xs text-roseva-text/70">Go to</span>
+                        <!-- Right: Go to Page Selector (Enhanced Size & Luxury Proportion) -->
+                        <div class="flex items-center gap-3 relative">
+                            <span class="font-manrope text-sm text-roseva-text/80 font-medium">Go to</span>
                             <div class="relative">
                                 <button id="pageDropdownBtn" type="button"
-                                    class="bg-white border border-[#D5CFC3] rounded-sm px-2.5 py-1 text-xs font-manrope flex items-center gap-2 hover:border-roseva-plum focus:outline-none transition-colors shadow-sm">
-                                    <span id="selectedPageLabel">10 / page</span>
-                                    <svg class="w-3.5 h-3.5 text-roseva-text/60 transition-transform duration-200"
+                                    class="bg-white border border-[#D5CFC3] rounded-lg px-4 py-2.5 text-sm font-manrope font-medium flex items-center justify-between gap-3 min-w-[130px] sm:min-w-[140px] hover:border-roseva-plum focus:outline-none transition-all shadow-sm text-roseva-text">
+                                    <span id="selectedPageLabel" class="font-medium text-roseva-text/90">Page 1</span>
+                                    <svg class="w-4 h-4 text-roseva-text/60 transition-transform duration-200"
                                         id="pageArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
 
-                                <!-- CUSTOM SORT DROPDOWN PAGE (Matches Image 2) -->
+                                <!-- CUSTOM SORT DROPDOWN PAGE -->
                                 <div id="pageDropdownMenu"
-                                    class="dropdown-menu hidden absolute right-0 bottom-full mb-2 w-28 bg-white rounded-2xl shadow-2xl border border-[#ECE6DC] z-40 overflow-hidden py-2">
+                                    class="dropdown-menu hidden absolute right-0 bottom-full mb-2 w-36 bg-[#FFFAF0] rounded-xl shadow-xl border border-[#7A2E47]/15 z-40 overflow-hidden py-1.5 backdrop-blur-md">
                                     <div
-                                        class="max-h-72 overflow-y-auto no-scrollbar divide-y divide-[#EFE9E0] text-center font-manrope text-xl text-roseva-text font-normal">
-                                        <button type="button" onclick="selectPageOption('01')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">01</button>
-                                        <button type="button" onclick="selectPageOption('02')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">02</button>
-                                        <button type="button" onclick="selectPageOption('03')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">03</button>
-                                        <button type="button" onclick="selectPageOption('04')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">04</button>
-                                        <button type="button" onclick="selectPageOption('05')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">05</button>
-                                        <button type="button" onclick="selectPageOption('06')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">06</button>
-                                        <button type="button" onclick="selectPageOption('07')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">07</button>
-                                        <button type="button" onclick="selectPageOption('08')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">08</button>
-                                        <button type="button" onclick="selectPageOption('09')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">09</button>
-                                        <button type="button" onclick="selectPageOption('10')"
-                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#FDFBF7] transition-colors focus:outline-none">10</button>
+                                        class="max-h-60 overflow-y-auto no-scrollbar divide-y divide-[#7A2E47]/10 text-center font-manrope text-sm text-roseva-text font-medium">
+                                        <button type="button" onclick="selectPageOption(1)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            1</button>
+                                        <button type="button" onclick="selectPageOption(2)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            2</button>
+                                        <button type="button" onclick="selectPageOption(3)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            3</button>
+                                        <button type="button" onclick="selectPageOption(4)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            4</button>
+                                        <button type="button" onclick="selectPageOption(5)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            5</button>
+                                        <button type="button" onclick="selectPageOption(6)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            6</button>
+                                        <button type="button" onclick="selectPageOption(7)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            7</button>
+                                        <button type="button" onclick="selectPageOption(8)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            8</button>
+                                        <button type="button" onclick="selectPageOption(9)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            9</button>
+                                        <button type="button" onclick="selectPageOption(10)"
+                                            class="w-full py-2.5 hover:text-roseva-plum hover:bg-[#7A2E47]/10 transition-colors focus:outline-none">Page
+                                            10</button>
                                     </div>
                                 </div>
                             </div>

@@ -537,10 +537,8 @@ function selectSortOption(optionText) {
 }
 
 function selectPageOption(pageNumber) {
-    const label = document.getElementById('selectedPageLabel');
-    if (label) {
-        label.innerText = `${pageNumber} / page`;
-    }
+    const pageNum = parseInt(pageNumber, 10);
+    setProductPage(pageNum);
     const pageMenu = document.getElementById('pageDropdownMenu');
     const pageArrow = document.getElementById('pageArrow');
     if (pageMenu) pageMenu.classList.add('hidden');
@@ -568,4 +566,121 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ==========================================
+// PRODUCTS PAGINATION SYSTEM
+// ==========================================
+let currentProductPage = 1;
+const totalProductPages = 10;
+
+function renderPagination() {
+    const container = document.getElementById('paginationButtons');
+    if (!container) return;
+
+    const total = totalProductPages;
+    const current = currentProductPage;
+
+    // Sync "Go to" button label
+    const label = document.getElementById('selectedPageLabel');
+    if (label) {
+        label.innerText = `Page ${current}`;
+    }
+
+    // Calculate smart page range with ellipsis
+    let pages = [];
+    if (total <= 7) {
+        for (let i = 1; i <= total; i++) pages.push(i);
+    } else {
+        pages.push(1);
+
+        let start = Math.max(2, current - 2);
+        let end = Math.min(total - 1, current + 2);
+
+        if (current <= 4) {
+            start = 2;
+            end = 5;
+        } else if (current >= total - 3) {
+            start = total - 4;
+            end = total - 1;
+        }
+
+        if (start > 2) {
+            pages.push('...');
+        }
+
+        for (let i = start; i <= end; i++) {
+            pages.push(i);
+        }
+
+        if (end < total - 1) {
+            pages.push('...');
+        }
+
+        pages.push(total);
+    }
+
+    // Previous Arrow (<)
+    const prevDisabled = current <= 1;
+    let html = `
+        <button type="button" onclick="changeProductPage(-1)" ${prevDisabled ? 'disabled' : ''}
+            class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border ${prevDisabled ? 'border-[#EBE3D7]/60 text-roseva-text/30 cursor-not-allowed bg-white/40' : 'border-[#D5CFC3] text-roseva-text/80 hover:border-roseva-plum hover:text-roseva-plum hover:bg-white bg-white/80 cursor-pointer'} transition-all font-medium text-sm shadow-sm focus:outline-none"
+            title="Previous page" aria-label="Previous Page">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+    `;
+
+    // Numeric Buttons & Ellipsis
+    pages.forEach(p => {
+        if (p === '...') {
+            html += `<span class="w-6 sm:w-8 h-8 sm:h-9 flex items-center justify-center text-roseva-text/40 font-medium select-none">...</span>`;
+        } else {
+            const isActive = p === current;
+            if (isActive) {
+                html += `
+                    <button type="button" onclick="setProductPage(${p})"
+                        class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-roseva-plum text-white font-semibold flex items-center justify-center shadow-md transition-all scale-105 focus:outline-none font-manrope text-xs sm:text-sm">
+                        ${p}
+                    </button>
+                `;
+            } else {
+                html += `
+                    <button type="button" onclick="setProductPage(${p})"
+                        class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-[#D5CFC3] bg-white/80 text-roseva-text/80 hover:border-roseva-plum hover:text-roseva-plum hover:bg-white font-medium flex items-center justify-center transition-all shadow-sm focus:outline-none font-manrope text-xs sm:text-sm">
+                        ${p}
+                    </button>
+                `;
+            }
+        }
+    });
+
+    // Next Arrow (>)
+    const nextDisabled = current >= total;
+    html += `
+        <button type="button" onclick="changeProductPage(1)" ${nextDisabled ? 'disabled' : ''}
+            class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border ${nextDisabled ? 'border-[#EBE3D7]/60 text-roseva-text/30 cursor-not-allowed bg-white/40' : 'border-[#D5CFC3] text-roseva-text/80 hover:border-roseva-plum hover:text-roseva-plum hover:bg-white bg-white/80 cursor-pointer'} transition-all font-medium text-sm shadow-sm focus:outline-none"
+            title="Next page" aria-label="Next Page">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    `;
+
+    container.innerHTML = html;
+}
+
+function changeProductPage(delta) {
+    setProductPage(currentProductPage + delta);
+}
+
+function setProductPage(newPage) {
+    if (newPage < 1 || newPage > totalProductPages) return;
+    currentProductPage = newPage;
+    renderPagination();
+}
+
+// Initialise pagination on DOM Load
+document.addEventListener('DOMContentLoaded', () => {
+    renderPagination();
+});
 
