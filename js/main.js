@@ -4,6 +4,83 @@
 // AUTHENTICATION & USER STATE MANAGEMENT
 // ==========================================
 const AUTH_STORAGE_KEY = 'roseva_user';
+const GUEST_CART_STORAGE_KEY = 'roseva_guest_cart';
+
+// Product Catalog metadata for uniform cart items
+const PRODUCT_CATALOG = {
+    'Roséva Hydro-Boost': { price: 20, size: '100ml', image: 'assets/hydro boost.png' },
+    'Roséva Glow Restore': { price: 35, size: '320ml', image: 'assets/glow restore.png' },
+    'Roséva Skin Renewal': { price: 40, size: '60ml', image: 'assets/skin renewal.png' },
+    'Roséva Cloud Drench': { price: 15, size: '250ml', image: 'assets/cloud drench.png' },
+    'Roséva Cloud Drench Intensive': { price: 58, size: '200ml', image: 'assets/cloud drench.png' },
+    'Roséva Hydro-Boost Crème': { price: 46, size: '50ml', image: 'assets/hydro boost.png' },
+    'Roséva Skin Renewal Concentrate': { price: 62, size: '30ml', image: 'assets/skin renewal.png' },
+    'Roséva Glow Restore Milk': { price: 35, size: '150ml', image: 'assets/glow restore.png' },
+    'Roséva Hydro-Boost Balm': { price: 48, size: '50ml', image: 'assets/hydro boost.png' },
+    'Roséva Cloud Drench Mist': { price: 52, size: '120ml', image: 'assets/cloud drench.png' }
+};
+
+// Handle guest cart reset on reload / refresh
+function initGuestCartReloadDetection() {
+    const user = getLoggedInUser();
+    if (!user) {
+        try {
+            let isReload = false;
+            if (window.performance) {
+                const nav = performance.getEntriesByType && performance.getEntriesByType('navigation');
+                if (nav && nav.length > 0) {
+                    isReload = (nav[0].type === 'reload');
+                } else if (performance.navigation) {
+                    isReload = (performance.navigation.type === 1);
+                }
+            }
+            if (isReload) {
+                sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
+            }
+        } catch (e) {
+            console.error('Error in reload detection:', e);
+        }
+    }
+}
+initGuestCartReloadDetection();
+
+function getUserCartKey(user) {
+    if (!user) user = getLoggedInUser();
+    if (!user) return null;
+    return 'roseva_cart_' + (user.email || user.name || 'user').replace(/[^a-zA-Z0-9_]/g, '_');
+}
+
+function getCartItems() {
+    const user = getLoggedInUser();
+    try {
+        if (user) {
+            const key = getUserCartKey(user);
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : [];
+        } else {
+            const data = sessionStorage.getItem(GUEST_CART_STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+    } catch (e) {
+        console.error('Error reading cart items:', e);
+        return [];
+    }
+}
+
+function saveCartItems(items) {
+    const user = getLoggedInUser();
+    try {
+        if (user) {
+            const key = getUserCartKey(user);
+            localStorage.setItem(key, JSON.stringify(items));
+        } else {
+            sessionStorage.setItem(GUEST_CART_STORAGE_KEY, JSON.stringify(items));
+        }
+    } catch (e) {
+        console.error('Error saving cart items:', e);
+    }
+    updateCartBadge();
+}
 
 function getLoggedInUser() {
     try {
@@ -18,7 +95,36 @@ function getLoggedInUser() {
 function setLoggedInUser(user) {
     try {
         localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+
+        // Merge any temporary guest cart into logged in user's cart
+        try {
+            const guestData = sessionStorage.getItem(GUEST_CART_STORAGE_KEY);
+            if (guestData) {
+                const guestItems = JSON.parse(guestData);
+                if (Array.isArray(guestItems) && guestItems.length > 0) {
+                    const userKey = getUserCartKey(user);
+                    const userCart = JSON.parse(localStorage.getItem(userKey) || '[]');
+                    guestItems.forEach(gItem => {
+                        const existing = userCart.find(u => u.name === gItem.name);
+                        if (existing) {
+                            existing.quantity = (existing.quantity || 1) + (gItem.quantity || 1);
+                        } else {
+                            userCart.push(gItem);
+                        }
+                    });
+                    localStorage.setItem(userKey, JSON.stringify(userCart));
+                }
+                sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
+            }
+        } catch (mergeErr) {
+            console.error('Error merging guest cart:', mergeErr);
+        }
+
         updateAuthUI();
+        updateCartBadge();
+        if (window.location.pathname.includes('cart.jsp')) {
+            renderCartPage();
+        }
         showAuthToast(`Welcome, ${user.name}!`);
     } catch (e) {
         console.error('Error saving user state:', e);
@@ -27,7 +133,13 @@ function setLoggedInUser(user) {
 
 function logoutUser() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
+    // Remove guest cart so logout view is clean empty cart
+    sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
     updateAuthUI();
+    updateCartBadge();
+    if (window.location.pathname.includes('cart.jsp')) {
+        renderCartPage();
+    }
     showAuthToast('Successfully signed out.');
 
     // If on profile page, refresh or show logged-out view
@@ -374,10 +486,14 @@ function handleSignUp(e) {
     closeAuthModal();
 }
 
-// Initialise Auth & Navbar on DOM load
+// Initialise Auth, Navbar & Cart on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     ensureAuthModal();
     updateAuthUI();
+    updateCartBadge();
+    if (window.location.pathname.includes('cart.jsp')) {
+        renderCartPage();
+    }
 });
 
 // ==========================================
@@ -458,16 +574,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Shopping Cart Notification feedback
-let cartCount = 0;
-function addToCart(productName, price, quantity = 1) {
-    const qty = typeof quantity === 'number' && quantity > 0 ? quantity : 1;
-    cartCount += qty;
+// ==========================================
+// SHOPPING CART CORE LOGIC & OPERATIONS
+// ==========================================
+
+function updateCartBadge() {
     const badge = document.getElementById('cartBadge');
-    if (badge) {
-        badge.innerText = cartCount;
-        badge.classList.add('scale-125');
-        setTimeout(() => badge.classList.remove('scale-125'), 200);
+    if (!badge) return;
+    const items = getCartItems();
+    const count = items.length;
+    badge.innerText = count;
+    badge.classList.add('scale-125');
+    setTimeout(() => badge.classList.remove('scale-125'), 200);
+}
+
+function addToCart(productName, price, quantity = 1, showToast = true) {
+    const qty = typeof quantity === 'number' && quantity > 0 ? quantity : 1;
+    const catalog = PRODUCT_CATALOG[productName] || {};
+    const itemPrice = typeof price === 'number' && price > 0 ? price : (catalog.price || 20);
+    const itemSize = catalog.size || '100ml';
+    const itemImage = catalog.image || 'assets/logo.png';
+
+    const items = getCartItems();
+    const existingIndex = items.findIndex(item => item.name === productName);
+
+    if (existingIndex > -1) {
+        items[existingIndex].quantity = (items[existingIndex].quantity || 1) + qty;
+        if (items[existingIndex].selected === undefined) {
+            items[existingIndex].selected = true;
+        }
+    } else {
+        items.push({
+            id: 'item-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+            name: productName,
+            price: itemPrice,
+            quantity: qty,
+            size: itemSize,
+            image: itemImage,
+            selected: true
+        });
+    }
+
+    saveCartItems(items);
+
+    if (showToast) {
+        showAuthToast(`Added ${qty} × ${productName} to cart!`);
+    }
+
+    if (window.location.pathname.includes('cart.jsp')) {
+        renderCartPage();
     }
 }
 
@@ -492,11 +647,211 @@ function incrementCardQty(id) {
 
 function addCardToCart(name, price, qtyId) {
     const el = document.getElementById(qtyId);
-    const qty = el ? parseInt(el.innerText, 10) || 1 : 1;
-    for (let i = 0; i < qty; i++) {
-        addToCart(name, price);
+    const qty = el ? (parseInt(el.innerText, 10) || 1) : 1;
+    addToCart(name, price, qty, true);
+}
+
+// Cart Page UI Rendering & Calculation Handler
+function renderCartPage() {
+    const emptyState = document.getElementById('cartEmptyState');
+    const contentWrapper = document.getElementById('cartContentWrapper');
+    const itemsList = document.getElementById('cartItemsList');
+    const itemCountLabel = document.getElementById('itemCountLabel');
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const totalAmountEl = document.getElementById('selectedTotalAmount');
+    const authPrompt = document.getElementById('cartSignInPrompt');
+
+    if (!itemsList) return;
+
+    const user = getLoggedInUser();
+    const items = getCartItems();
+
+    if (authPrompt) {
+        authPrompt.style.display = user ? 'none' : 'block';
     }
-    showAuthToast(`Added ${qty} × ${name} to cart!`);
+
+    if (!items || items.length === 0) {
+        if (emptyState) {
+            emptyState.classList.remove('hidden');
+            emptyState.classList.add('flex');
+        }
+        if (contentWrapper) {
+            contentWrapper.classList.add('hidden');
+        }
+        if (itemCountLabel) itemCountLabel.innerText = '(0 Items)';
+        if (selectAllCheckbox) selectAllCheckbox.checked = false;
+        if (totalAmountEl) totalAmountEl.innerText = '$0';
+        updateCartBadge();
+        return;
+    }
+
+    if (emptyState) {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+    }
+    if (contentWrapper) {
+        contentWrapper.classList.remove('hidden');
+    }
+
+    let html = '';
+    items.forEach(item => {
+        const isChecked = item.selected !== false;
+        const subtotal = (item.price || 0) * (item.quantity || 1);
+        html += `
+            <div class="cart-item-row bg-[#EFEBE9] rounded-xl p-4 sm:p-6 flex flex-col md:grid md:grid-cols-12 gap-4 items-center shadow-sm transition-all duration-200"
+                data-id="${item.id}" data-price="${item.price}">
+                <!-- Left: Checkbox + Product Image + Title/Size/Wishlist -->
+                <div class="w-full md:col-span-6 flex items-center gap-4">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="handleItemCheckboxChange('${item.id}', this.checked)"
+                        class="item-checkbox w-4 h-4 rounded border-[#D5CFC3] text-roseva-plum accent-roseva-plum focus:ring-0 cursor-pointer flex-shrink-0" />
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-white/70 border border-[#E0D7C9] flex-shrink-0">
+                        <img src="${item.image || 'assets/logo.png'}" alt="${item.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="font-oranienbaum text-base sm:text-lg text-roseva-text font-medium leading-snug">
+                            ${item.name}
+                        </h3>
+                        <div class="flex items-center gap-3">
+                            <span class="font-quicksand text-xs text-roseva-text/60">(${item.size || '100ml'})</span>
+                            <button type="button" onclick="toggleItemWishlist(this)"
+                                class="text-roseva-text/60 hover:text-roseva-plum transition-colors focus:outline-none"
+                                aria-label="Save to wishlist">
+                                <svg class="w-4 h-4 wishlist-heart" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="w-full md:col-span-2 flex justify-between md:justify-center items-center font-quicksand text-sm sm:text-base font-semibold text-roseva-text">
+                    <span class="md:hidden text-xs font-normal text-roseva-text/60">Price:</span>
+                    <span>$${item.price}</span>
+                </div>
+
+                <!-- Quantity Controls: + QTY - -->
+                <div class="w-full md:col-span-2 flex justify-between md:justify-center items-center">
+                    <span class="md:hidden text-xs font-normal text-roseva-text/60">Quantity:</span>
+                    <div class="flex items-center gap-3 font-manrope text-sm font-medium text-roseva-text">
+                        <button type="button" onclick="changeItemQty('${item.id}', 1)"
+                            class="w-6 h-6 flex items-center justify-center hover:text-roseva-plum transition-colors focus:outline-none text-base font-bold select-none cursor-pointer">+</button>
+                        <span class="item-qty w-4 text-center font-semibold">${item.quantity}</span>
+                        <button type="button" onclick="changeItemQty('${item.id}', -1)"
+                            class="w-6 h-6 flex items-center justify-center hover:text-roseva-plum transition-colors focus:outline-none text-base font-bold select-none cursor-pointer">-</button>
+                    </div>
+                </div>
+
+                <!-- Subtotal -->
+                <div class="w-full md:col-span-2 flex justify-between md:justify-end items-center font-quicksand text-sm sm:text-base font-bold text-roseva-text">
+                    <span class="md:hidden text-xs font-normal text-roseva-text/60">Subtotal:</span>
+                    <span class="item-subtotal">$${subtotal}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    itemsList.innerHTML = html;
+    updateCartCalculations();
+}
+
+function handleItemCheckboxChange(id, isChecked) {
+    const items = getCartItems();
+    const item = items.find(i => i.id === id);
+    if (item) {
+        item.selected = isChecked;
+        saveCartItems(items);
+        updateCartCalculations();
+    }
+}
+
+function changeItemQty(id, delta) {
+    const items = getCartItems();
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    item.quantity = Math.max(1, (item.quantity || 1) + delta);
+    saveCartItems(items);
+    renderCartPage();
+}
+
+function toggleSelectAll(selectAllCheckbox) {
+    const isChecked = selectAllCheckbox.checked;
+    const items = getCartItems();
+    items.forEach(item => {
+        item.selected = isChecked;
+    });
+    saveCartItems(items);
+
+    document.querySelectorAll('.item-checkbox').forEach(cb => {
+        cb.checked = isChecked;
+    });
+    updateCartCalculations();
+}
+
+function updateCartCalculations() {
+    const items = getCartItems();
+    const selectAll = document.getElementById('selectAllCheckbox');
+    const countLabel = document.getElementById('itemCountLabel');
+    const totalAmountEl = document.getElementById('selectedTotalAmount');
+
+    let totalSelectedPrice = 0;
+    let totalCheckedCount = 0;
+
+    items.forEach(item => {
+        if (item.selected !== false) {
+            totalSelectedPrice += ((item.price || 0) * (item.quantity || 1));
+            totalCheckedCount++;
+        }
+    });
+
+    if (selectAll) {
+        selectAll.checked = items.length > 0 && totalCheckedCount === items.length;
+    }
+
+    if (countLabel) {
+        countLabel.innerText = `(${items.length} Items)`;
+    }
+
+    if (totalAmountEl) {
+        totalAmountEl.innerText = `$${totalSelectedPrice}`;
+    }
+
+    updateCartBadge();
+}
+
+function deleteSelectedItems() {
+    let items = getCartItems();
+    const selectedCount = items.filter(i => i.selected !== false).length;
+    if (selectedCount === 0) {
+        alert('Please select at least one item to delete.');
+        return;
+    }
+
+    items = items.filter(i => i.selected === false);
+    saveCartItems(items);
+    renderCartPage();
+    showAuthToast('Selected items removed from cart.');
+}
+
+function toggleItemWishlist(btn) {
+    const heart = btn.querySelector('.wishlist-heart');
+    if (heart) {
+        heart.classList.toggle('text-roseva-plum');
+        heart.classList.toggle('fill-current');
+    }
+}
+
+function proceedToCheckout() {
+    const items = getCartItems();
+    const selectedItems = items.filter(i => i.selected !== false);
+    if (selectedItems.length === 0) {
+        alert('Please select at least one item to proceed.');
+        return;
+    }
+    sessionStorage.setItem('roseva_checkout_items', JSON.stringify(selectedItems));
+    window.location.href = 'checkout.jsp';
 }
 
 // ==========================================

@@ -65,7 +65,7 @@
                         <img src="assets/cart icon.png" alt="Cart"
                             class="w-7 sm:w-8 h-7 sm:h-8 object-contain group-hover:scale-110 transition-transform duration-200" />
                         <span id="cartBadge"
-                            class="absolute -top-1 -right-1 bg-roseva-plum text-white text-[10px] font-manrope font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">3</span>
+                            class="absolute -top-1 -right-1 bg-roseva-plum text-white text-[10px] font-manrope font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">0</span>
                     </a>
 
                     <!-- Mobile Hamburger Button -->
@@ -275,32 +275,14 @@
                             Order Details
                         </h2>
 
-                        <div class="space-y-6 font-quicksand text-sm">
-                            <!-- Item 1 -->
+                        <div id="checkoutOrderDetailsList" class="space-y-6 font-quicksand text-sm">
+                            <!-- Populated dynamically via JS -->
                             <div class="flex items-baseline justify-between gap-4">
                                 <div class="leading-relaxed">
                                     <span class="font-medium text-roseva-text block">1. Roséva Glow Restore</span>
                                     <span class="text-xs text-roseva-text/60">(320ml) &nbsp; x 3</span>
                                 </div>
                                 <span class="font-semibold text-roseva-text text-base">$105</span>
-                            </div>
-
-                            <!-- Item 2 -->
-                            <div class="flex items-baseline justify-between gap-4">
-                                <div class="leading-relaxed">
-                                    <span class="font-medium text-roseva-text block">2. Roséva Skin Renewal</span>
-                                    <span class="text-xs text-roseva-text/60">(60ml) &nbsp;&nbsp; x 1</span>
-                                </div>
-                                <span class="font-semibold text-roseva-text text-base">$40</span>
-                            </div>
-
-                            <!-- Item 3 -->
-                            <div class="flex items-baseline justify-between gap-4">
-                                <div class="leading-relaxed">
-                                    <span class="font-medium text-roseva-text block">3. Roséva Cloud Drench</span>
-                                    <span class="text-xs text-roseva-text/60">(250ml) &nbsp; x 5</span>
-                                </div>
-                                <span class="font-semibold text-roseva-text text-base">$75</span>
                             </div>
                         </div>
                     </div>
@@ -313,8 +295,8 @@
 
                         <div class="space-y-3 font-quicksand text-sm text-roseva-text/80">
                             <div class="flex items-center justify-between">
-                                <span>3 Items</span>
-                                <span class="font-semibold text-roseva-text">$220</span>
+                                <span id="checkoutItemsCountLabel">3 Items</span>
+                                <span id="checkoutSubtotalAmount" class="font-semibold text-roseva-text">$220</span>
                             </div>
                             <div class="flex items-center justify-between">
                                 <span>Shipping fee*</span>
@@ -327,7 +309,8 @@
                             <div
                                 class="border-t border-roseva-text/20 pt-3 flex items-center justify-between font-bold text-base text-roseva-text">
                                 <span>Total</span>
-                                <span class="font-oranienbaum text-xl text-roseva-text">$215</span>
+                                <span id="checkoutTotalAmount"
+                                    class="font-oranienbaum text-xl text-roseva-text">$215</span>
                             </div>
                         </div>
                     </div>
@@ -453,7 +436,89 @@
                 if (cityArrow) cityArrow.classList.remove('rotate-180');
             }
 
+            // Populate dynamic order details from checkout items
+            function renderCheckoutItems() {
+                const list = document.getElementById('checkoutOrderDetailsList');
+                const countLabel = document.getElementById('checkoutItemsCountLabel');
+                const subtotalLabel = document.getElementById('checkoutSubtotalAmount');
+                const totalLabel = document.getElementById('checkoutTotalAmount');
+
+                if (!list) return;
+
+                let checkoutItems = [];
+                try {
+                    const data = sessionStorage.getItem('roseva_checkout_items');
+                    if (data) {
+                        checkoutItems = JSON.parse(data);
+                    }
+                } catch (e) {
+                    console.error('Error reading checkout items:', e);
+                }
+
+                if (!checkoutItems || checkoutItems.length === 0) {
+                    // Fallback to active cart selected items if any
+                    const cartItems = getCartItems();
+                    checkoutItems = cartItems.filter(i => i.selected !== false);
+                }
+
+                if (!checkoutItems || checkoutItems.length === 0) {
+                    list.innerHTML = `
+                        <p class="text-roseva-text/60 italic text-sm">No items selected for checkout. <a href="cart.jsp" class="text-roseva-plum underline">Return to cart</a></p>
+                    `;
+                    if (countLabel) countLabel.innerText = '0 Items';
+                    if (subtotalLabel) subtotalLabel.innerText = '$0';
+                    if (totalLabel) totalLabel.innerText = '$0';
+                    return;
+                }
+
+                let html = '';
+                let subtotal = 0;
+
+                checkoutItems.forEach((item, index) => {
+                    const itemSubtotal = (item.price || 0) * (item.quantity || 1);
+                    subtotal += itemSubtotal;
+                    html += `
+                        <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#7A2E47]/10 last:border-b-0">
+                            <div class="leading-relaxed">
+                                <span class="font-medium text-roseva-text block">${index + 1}. ${item.name}</span>
+                                <span class="text-xs text-roseva-text/60">(${item.size || '100ml'}) &nbsp; × ${item.quantity}</span>
+                            </div>
+                            <span class="font-semibold text-roseva-text text-base">$${itemSubtotal}</span>
+                        </div>
+                    `;
+                });
+
+                list.innerHTML = html;
+
+                const shipping = 5;
+                const discount = 10;
+                const grandTotal = Math.max(0, subtotal + shipping - discount);
+
+                if (countLabel) countLabel.innerText = `${checkoutItems.length} Item${checkoutItems.length > 1 ? 's' : ''}`;
+                if (subtotalLabel) subtotalLabel.innerText = `$${subtotal}`;
+                if (totalLabel) totalLabel.innerText = `$${grandTotal}`;
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                renderCheckoutItems();
+            });
+
             function confirmOrder() {
+                // Remove purchased items from user or guest cart
+                try {
+                    const data = sessionStorage.getItem('roseva_checkout_items');
+                    if (data) {
+                        const purchased = JSON.parse(data);
+                        const purchasedIds = new Set(purchased.map(p => p.id || p.name));
+                        let cart = getCartItems();
+                        cart = cart.filter(item => !purchasedIds.has(item.id) && !purchasedIds.has(item.name));
+                        saveCartItems(cart);
+                        sessionStorage.removeItem('roseva_checkout_items');
+                    }
+                } catch (e) {
+                    console.error('Error updating cart on order confirm:', e);
+                }
+
                 alert('Order #RSV-2026-8941 placed successfully! Redirecting to your profile dashboard...');
                 window.location.href = 'profile.jsp';
             }

@@ -65,7 +65,7 @@
                         <img src="assets/cart icon.png" alt="Cart"
                             class="w-7 sm:w-8 h-7 sm:h-8 object-contain group-hover:scale-110 transition-transform duration-200" />
                         <span id="cartBadge"
-                            class="absolute -top-1 -right-1 bg-roseva-plum text-white text-[10px] font-manrope font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">3</span>
+                            class="absolute -top-1 -right-1 bg-roseva-plum text-white text-[10px] font-manrope font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">0</span>
                     </a>
 
                     <!-- Mobile Hamburger Button -->
