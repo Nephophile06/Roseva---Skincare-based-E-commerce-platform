@@ -288,6 +288,13 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 renderCartPage();
+                if (window.location.search.includes('loginRequired=1') || sessionStorage.getItem('roseva_checkout_login_required') === '1') {
+                    sessionStorage.removeItem('roseva_checkout_login_required');
+                    setTimeout(() => {
+                        openAuthModal('login');
+                        showAuthToast('Please sign in to proceed to checkout!', 'error');
+                    }, 300);
+                }
             });
         </script>
     </body>

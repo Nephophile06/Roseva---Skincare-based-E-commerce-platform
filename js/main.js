@@ -125,6 +125,9 @@ function setLoggedInUser(user) {
         if (window.location.pathname.includes('cart.jsp')) {
             renderCartPage();
         }
+        if (window.location.pathname.includes('checkout.jsp')) {
+            renderCheckoutItems();
+        }
         showAuthToast(`Welcome, ${user.name}!`);
     } catch (e) {
         console.error('Error saving user state:', e);
@@ -139,6 +142,9 @@ function logoutUser() {
     updateCartBadge();
     if (window.location.pathname.includes('cart.jsp')) {
         renderCartPage();
+    }
+    if (window.location.pathname.includes('checkout.jsp')) {
+        window.location.href = 'cart.jsp?loginRequired=1';
     }
     showAuthToast('Successfully signed out.');
 
@@ -844,6 +850,13 @@ function toggleItemWishlist(btn) {
 }
 
 function proceedToCheckout() {
+    const user = getLoggedInUser();
+    if (!user) {
+        openAuthModal('login');
+        showAuthToast('Please sign in to proceed to checkout!', 'error');
+        return;
+    }
+
     const items = getCartItems();
     const selectedItems = items.filter(i => i.selected !== false);
     if (selectedItems.length === 0) {
@@ -853,6 +866,163 @@ function proceedToCheckout() {
     sessionStorage.setItem('roseva_checkout_items', JSON.stringify(selectedItems));
     window.location.href = 'checkout.jsp';
 }
+
+// ==========================================
+// CHECKOUT PAGE RENDERING & CALCULATIONS
+// ==========================================
+
+function renderCheckoutItems() {
+    const list = document.getElementById('checkoutOrderDetailsList');
+    if (!list) return;
+
+    // Auth Guard: Only logged-in users can access checkout
+    const user = getLoggedInUser();
+    if (!user) {
+        sessionStorage.setItem('roseva_checkout_login_required', '1');
+        window.location.href = 'cart.jsp?loginRequired=1';
+        return;
+    }
+
+    // Auto-populate user contact & delivery info if present and fields are empty
+    const emailInput = document.getElementById('checkoutEmail');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const phoneInput = document.getElementById('checkoutPhone');
+
+    if (user.email && emailInput && !emailInput.value) {
+        emailInput.value = user.email;
+    }
+    if (user.name) {
+        const parts = user.name.trim().split(/\s+/);
+        if (firstNameInput && !firstNameInput.value) {
+            firstNameInput.value = parts[0] || '';
+        }
+        if (lastNameInput && !lastNameInput.value) {
+            lastNameInput.value = parts.slice(1).join(' ') || '';
+        }
+    }
+    if (user.phone && phoneInput && !phoneInput.value) {
+        phoneInput.value = user.phone;
+    }
+
+    const countLabel = document.getElementById('checkoutItemsCountLabel');
+    const subtotalLabel = document.getElementById('checkoutSubtotalAmount');
+    const shippingLabel = document.getElementById('checkoutShippingAmount');
+    const discountLabel = document.getElementById('checkoutDiscountAmount');
+    const totalLabel = document.getElementById('checkoutTotalAmount');
+
+    let checkoutItems = [];
+    try {
+        const data = sessionStorage.getItem('roseva_checkout_items');
+        if (data) {
+            checkoutItems = JSON.parse(data);
+        }
+    } catch (e) {
+        console.error('Error reading checkout items:', e);
+    }
+
+    checkoutItems = Array.isArray(checkoutItems) ? checkoutItems.filter(i => i && typeof i === 'object' && i.name) : [];
+
+    // Fallback: If no session checkout items, get from active account cart
+    if (checkoutItems.length === 0) {
+        const cartItems = getCartItems();
+        const selectedOnly = cartItems.filter(i => i && i.selected !== false);
+        checkoutItems = selectedOnly.length > 0 ? selectedOnly : cartItems;
+    }
+
+    if (checkoutItems.length === 0) {
+        list.innerHTML =
+            '<div class="py-8 text-center bg-white/50 rounded-xl border border-[#7A2E47]/10 p-4">' +
+            '<p class="text-roseva-text/70 italic text-sm mb-3">No products found in your cart.</p>' +
+            '<a href="products.jsp" class="inline-block bg-roseva-plum text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#100C08] transition-colors">Shop Formulations</a>' +
+            '</div>';
+        if (countLabel) countLabel.innerText = '0 Items';
+        if (subtotalLabel) subtotalLabel.innerText = '$0';
+        if (shippingLabel) shippingLabel.innerText = '$0';
+        if (discountLabel) discountLabel.innerText = '$0';
+        if (totalLabel) totalLabel.innerText = '$0';
+        return;
+    }
+
+    let html = '';
+    let subtotal = 0;
+    let totalQty = 0;
+
+    checkoutItems.forEach((item, index) => {
+        const catalog = PRODUCT_CATALOG[item.name] || {};
+        const name = item.name || 'Roséva Botanical Formula';
+        const size = (item.size && typeof item.size === 'string') ? item.size : (catalog.size || '100ml');
+        const price = (typeof item.price === 'number' && item.price > 0) ? item.price : (catalog.price || 20);
+        const quantity = (typeof item.quantity === 'number' && item.quantity > 0) ? item.quantity : 1;
+        const itemSubtotal = price * quantity;
+
+        subtotal += itemSubtotal;
+        totalQty += quantity;
+
+        html +=
+            '<div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#7A2E47]/10 last:border-b-0">' +
+            '<div class="leading-relaxed">' +
+            '<span class="font-medium text-roseva-text block">' + (index + 1) + '. ' + name + '</span>' +
+            '<span class="text-xs text-roseva-text/60">(' + size + ') &nbsp; × ' + quantity + '</span>' +
+            '</div>' +
+            '<span class="font-semibold text-roseva-text text-base">$' + itemSubtotal + '</span>' +
+            '</div>';
+    });
+
+    list.innerHTML = html;
+
+    // Requirement: Shipping fee is $10, Discount is $2, Total sum is $2 less than Subtotal + Shipping
+    const shipping = 10;
+    const discount = 2;
+    const grandTotal = Math.max(0, subtotal + shipping - discount);
+
+    if (countLabel) countLabel.innerText = totalQty + (totalQty === 1 ? ' Item' : ' Items');
+    if (subtotalLabel) subtotalLabel.innerText = '$' + subtotal;
+    if (shippingLabel) shippingLabel.innerText = '$' + shipping;
+    if (discountLabel) discountLabel.innerText = '$' + discount;
+    if (totalLabel) totalLabel.innerText = '$' + grandTotal;
+}
+
+function confirmOrder() {
+    const user = getLoggedInUser();
+    if (!user) {
+        alert('Please log in to confirm your order.');
+        window.location.href = 'cart.jsp?loginRequired=1';
+        return;
+    }
+
+    try {
+        let checkoutItems = [];
+        const data = sessionStorage.getItem('roseva_checkout_items');
+        if (data) {
+            checkoutItems = JSON.parse(data);
+        }
+        if (!checkoutItems || checkoutItems.length === 0) {
+            checkoutItems = getCartItems().filter(i => i.selected !== false);
+        }
+
+        const purchasedNames = new Set(checkoutItems.map(p => p.name));
+        let cart = getCartItems();
+        cart = cart.filter(item => !purchasedNames.has(item.name));
+        saveCartItems(cart);
+        sessionStorage.removeItem('roseva_checkout_items');
+    } catch (e) {
+        console.error('Error updating cart on order confirm:', e);
+    }
+
+    alert('Order placed successfully! Redirecting to your profile dashboard...');
+    window.location.href = 'profile.jsp';
+}
+
+window.renderCheckoutItems = renderCheckoutItems;
+window.confirmOrder = confirmOrder;
+
+// Initialize checkout items on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('checkoutOrderDetailsList') || window.location.pathname.includes('checkout.jsp')) {
+        renderCheckoutItems();
+    }
+});
 
 // ==========================================
 // CUSTOM DROPDOWNS LOGIC (Sort & Page Size)
