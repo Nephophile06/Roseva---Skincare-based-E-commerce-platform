@@ -135,54 +135,63 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-roseva-text/80 mb-1.5">Name:</label>
-                        <input type="text" id="profileInputName" value="Tousif Tasrik"
-                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                        <input type="text" id="profileInputName" value="Tousif Tasrik" disabled
+                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm disabled:bg-[#f9f8f6] disabled:text-roseva-text/75 disabled:cursor-not-allowed" />
                     </div>
 
-                    <!-- Email -->
+                    <!-- Email (Fixed, Non-editable) -->
                     <div>
-                        <label class="block text-roseva-text/80 mb-1.5">Email:</label>
-                        <input type="email" id="profileInputEmail" value="tousif.tasrik@roseva.com"
-                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                        <label class="block text-roseva-text/80 mb-1.5">Email <span
+                                class="text-xs text-roseva-text/50">(Fixed)</span>:</label>
+                        <input type="email" id="profileInputEmail" value="tousif.tasrik@roseva.com" readonly disabled
+                            class="w-full px-4 py-3 bg-[#f5f2eb] border border-gray-300 rounded-md text-roseva-text/60 cursor-not-allowed shadow-inner" />
                     </div>
 
                     <!-- Address -->
                     <div>
                         <label class="block text-roseva-text/80 mb-1.5">Address:</label>
-                        <input type="text" value="house, road, area"
-                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                        <input type="text" id="profileInputAddress" value="45/A, Banani Avenue, Road 11" disabled
+                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm disabled:bg-[#f9f8f6] disabled:text-roseva-text/75 disabled:cursor-not-allowed" />
                     </div>
 
                     <!-- Contact Number -->
                     <div>
                         <label class="block text-roseva-text/80 mb-1.5">Contact Number:</label>
-                        <input type="tel" value="Your Phone Number"
-                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                        <input type="tel" id="profileInputContact" value="+880 1712 345678" disabled
+                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text focus:outline-none focus:border-roseva-plum transition-colors shadow-sm disabled:bg-[#f9f8f6] disabled:text-roseva-text/75 disabled:cursor-not-allowed" />
                     </div>
 
                     <!-- Gender Radio Options -->
                     <div class="pt-2 flex items-center gap-6">
                         <span class="text-roseva-text/80">Gender:</span>
                         <label class="flex items-center gap-2 cursor-pointer select-none">
-                            <input type="radio" name="profileGender" value="male"
-                                class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                            <input type="radio" name="profileGender" value="male" checked disabled
+                                class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                             <span>Male</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer select-none">
-                            <input type="radio" name="profileGender" value="female"
-                                class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                            <input type="radio" name="profileGender" value="female" disabled
+                                class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                             <span>Female</span>
                         </label>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="pt-4 flex items-center gap-4">
-                        <button type="button" onclick="alert('Profile information updated successfully!')"
-                            class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm px-5 py-2 rounded-lg shadow-sm transition-all">
+                    <div class="pt-4 flex items-center gap-3">
+                        <button type="button" id="editProfileBtn" onclick="toggleEditProfile()"
+                            class="bg-roseva-blue text-white font-manrope font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer">
                             Edit Information
                         </button>
+                        <button type="button" id="saveProfileBtn" onclick="updateProfileInfo()"
+                            class="hidden bg-[#2e7d32] hover:bg-[#1b5e20] text-white font-manrope font-semibold text-sm px-6 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer flex items-center gap-1.5">
+                            <span>Save</span>
+                        </button>
+                        <button type="button" id="cancelProfileBtn" onclick="cancelEditProfile()"
+                            class="hidden bg-gray-200 hover:bg-gray-300 text-roseva-text font-manrope font-semibold text-sm px-4 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer">
+                            Cancel
+                        </button>
                         <button type="button" onclick="alert('Password reset link sent to your email.')"
-                            class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm px-5 py-2 rounded-lg shadow-sm transition-all">
+                            class="bg-transparent border border-[#7A2E47]/30 hover:bg-[#7A2E47]/10 text-roseva-plum font-manrope font-semibold text-sm px-4 py-2.5 rounded-lg transition-all cursor-pointer">
                             Change Password
                         </button>
                     </div>
@@ -202,32 +211,34 @@
                 <!-- Status Banner Ribbon (#EFEBE9) -->
                 <div
                     class="bg-[#EFEBE9] rounded-lg px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-quicksand font-medium text-roseva-text/90 mb-6 shadow-sm">
-                    <span class="text-roseva-plum font-semibold">On Shipping - 1</span>
-                    <span>Arrived - 0</span>
-                    <span>Canceled - 0</span>
+                    <span id="ribbonOnShipping" class="text-roseva-plum font-semibold">On Shipping - 1</span>
+                    <span id="ribbonArrived">Arrived - 0</span>
+                    <span id="ribbonCanceled">Canceled - 0</span>
                 </div>
 
-                <!-- Active Order Details Box -->
-                <div class="space-y-3 font-quicksand text-xs sm:text-sm text-roseva-text/85">
-                    <div class="flex items-center gap-4">
-                        <span class="font-medium text-roseva-text">Order ID:</span>
-                        <span class="font-manrope font-semibold text-roseva-plum">#RSV-2026-8941</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="font-medium text-roseva-text">Date &amp; Status:</span>
-                        <span>July 04, 2026 | <strong class="text-roseva-plum">In Transit</strong></span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="font-medium text-roseva-text">Total Amount:</span>
-                        <span class="font-bold text-roseva-text">$215 | 3 Items</span>
-                    </div>
+                <!-- Active Order Details Box Container -->
+                <div id="profileOrdersContainer" class="space-y-6">
+                    <div class="space-y-3 font-quicksand text-xs sm:text-sm text-roseva-text/85">
+                        <div class="flex items-center gap-4">
+                            <span class="font-medium text-roseva-text">Order ID:</span>
+                            <span class="font-manrope font-semibold text-roseva-plum">#RSV-2026-8941</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="font-medium text-roseva-text">Date &amp; Status:</span>
+                            <span>July 04, 2026 | <strong class="text-roseva-plum">In Transit</strong></span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="font-medium text-roseva-text">Total Amount:</span>
+                            <span class="font-bold text-roseva-text">$215 | 3 Items</span>
+                        </div>
 
-                    <div class="pt-2">
-                        <button type="button"
-                            onclick="alert('Tracking Order #RSV-2026-8941: Package is currently in transit with Dhaka Central Logistics Courier.')"
-                            class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm px-5 py-2 rounded-lg shadow-sm transition-all">
-                            Track My Order
-                        </button>
+                        <div class="pt-2">
+                            <button type="button"
+                                onclick="alert('Tracking Order #RSV-2026-8941: Package is currently in transit with Dhaka Central Logistics Courier.')"
+                                class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm px-5 py-2 rounded-lg shadow-sm transition-all cursor-pointer">
+                                Track My Order
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -251,18 +262,18 @@
                         <h3 class="font-bold text-roseva-text mb-3 text-sm">Skin Barrier Health:</h3>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinBarrier" value="healthy"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinBarrier" value="healthy" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Healthy</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinBarrier" value="compromised" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinBarrier" value="compromised" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Compromised</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinBarrier" value="damaged"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinBarrier" value="damaged" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Damaged</span>
                             </label>
                         </div>
@@ -273,18 +284,18 @@
                         <h3 class="font-bold text-roseva-text mb-3 text-sm">Hydration Levels / TEWL:</h3>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinHydration" value="optimal"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinHydration" value="optimal" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Optimal</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinHydration" value="dehydrated" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinHydration" value="dehydrated" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Dehydrated</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinHydration" value="severely-parched"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinHydration" value="severely-parched" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Severely Parched</span>
                             </label>
                         </div>
@@ -295,18 +306,18 @@
                         <h3 class="font-bold text-roseva-text mb-3 text-sm">Skin Sensitivity &amp; Reactivity:</h3>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSensitivity" value="resilient"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSensitivity" value="resilient" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Resilient</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSensitivity" value="mildly-sensitive" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSensitivity" value="mildly-sensitive" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Mildly Sensitive</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSensitivity" value="hypersensitive"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSensitivity" value="hypersensitive" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Hypersensitive</span>
                             </label>
                         </div>
@@ -317,23 +328,23 @@
                         <h3 class="font-bold text-roseva-text mb-3 text-sm">Pore &amp; Sebum Profile:</h3>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSebum" value="clear"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSebum" value="clear" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Clear</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSebum" value="congested"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSebum" value="congested" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Congested</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSebum" value="enlarged-pores"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSebum" value="enlarged-pores" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Enlarged Pores</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="radio" name="skinSebum" value="high-sebum" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="radio" name="skinSebum" value="high-sebum" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>High Sebum (T-Zone)</span>
                             </label>
                         </div>
@@ -345,23 +356,23 @@
                         </h3>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="checkbox" name="stressor" value="uv" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="checkbox" name="stressor" value="uv" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>High UV Exposure</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="checkbox" name="stressor" value="bluelight" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="checkbox" name="stressor" value="bluelight" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Blue Light Stress (Screen Time)</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="checkbox" name="stressor" value="hardwater"
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="checkbox" name="stressor" value="hardwater" disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Hard Water Damage</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer">
-                                <input type="checkbox" name="stressor" value="pollution" checked
-                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
+                                <input type="checkbox" name="stressor" value="pollution" checked disabled
+                                    class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer disabled:cursor-not-allowed" />
                                 <span>Pollution Heavy</span>
                             </label>
                         </div>
@@ -372,13 +383,29 @@
                         <h3 class="font-bold text-roseva-text mb-3 text-sm">Other:</h3>
                         <div class="relative">
                             <textarea id="skinOtherText" rows="4" maxlength="200" oninput="updateCharCount(this)"
-                                placeholder="Please specify..."
-                                class="w-full p-3 bg-white border border-[#D5CFC3] rounded-md text-xs font-quicksand text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm"></textarea>
+                                disabled placeholder="Please specify..."
+                                class="w-full p-3 bg-white border border-[#D5CFC3] rounded-md text-xs font-quicksand text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm disabled:bg-[#f9f8f6] disabled:text-roseva-text/75 disabled:cursor-not-allowed"></textarea>
                             <span id="charCountLabel"
                                 class="absolute right-2 bottom-2 text-[10px] text-roseva-text/50 font-manrope">
                                 0/200
                             </span>
                         </div>
+                    </div>
+
+                    <!-- Personalization Action Buttons -->
+                    <div class="md:col-span-2 pt-2 flex items-center gap-3">
+                        <button type="button" id="editDiagnosticsBtn" onclick="toggleEditDiagnostics()"
+                            class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer">
+                            Edit
+                        </button>
+                        <button type="button" id="saveDiagnosticsBtn" onclick="saveSkinDiagnostics()"
+                            class="hidden bg-[#2e7d32] hover:bg-[#1b5e20] text-white font-manrope font-semibold text-sm px-6 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer">
+                            Save
+                        </button>
+                        <button type="button" id="cancelDiagnosticsBtn" onclick="cancelEditDiagnostics()"
+                            class="hidden bg-gray-200 hover:bg-gray-300 text-roseva-text font-manrope font-semibold text-sm px-4 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer">
+                            Cancel
+                        </button>
                     </div>
 
                 </div>
