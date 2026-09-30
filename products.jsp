@@ -148,13 +148,13 @@
                     <span>/</span>
                     <span class="text-roseva-text font-medium">Browse Products</span>
                     <span>/</span>
-                    <span id="activeCategoryBreadcrumb" class="text-roseva-text/70">Facial Wipes</span>
+                    <span id="activeCategoryBreadcrumb" class="text-roseva-text/70">All Products</span>
                 </nav>
 
                 <!-- Search & Sort Row -->
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
 
-                    <!-- Option matching #2: Unified Sleek Search Bar -->
+                    <!-- Unified Sleek Search Bar -->
                     <div
                         class="flex items-center w-full sm:max-w-md lg:max-w-lg border border-[#D5CFC3] rounded-lg bg-white px-4 py-2.5 focus-within:border-roseva-plum focus-within:ring-1 focus-within:ring-roseva-plum/20 transition-all shadow-sm">
 
@@ -166,12 +166,24 @@
                         </svg>
 
                         <!-- Input Field -->
-                        <input type="text" id="productSearchInput" placeholder="Search..."
+                        <input type="text" id="productSearchInput"
+                            placeholder="Search by name or tag (e.g. moisturizer, hydro-boost)..."
                             class="w-full px-3 text-sm font-quicksand text-roseva-text placeholder-roseva-text/40 bg-transparent focus:outline-none" />
 
+                        <!-- Clear Search Button (Visible when query exists) -->
+                        <button type="button" id="clearSearchBtn" onclick="clearProductSearch()"
+                            class="hidden text-roseva-text/40 hover:text-roseva-plum focus:outline-none transition-colors mr-2 flex-shrink-0"
+                            title="Clear search" aria-label="Clear search">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+
                         <!-- Mic Icon (Right) -->
-                        <button type="button"
-                            class="text-roseva-text/40 hover:text-roseva-plum focus:outline-none transition-colors flex-shrink-0">
+                        <button type="button" id="voiceSearchBtn"
+                            class="text-roseva-text/40 hover:text-roseva-plum focus:outline-none transition-colors flex-shrink-0"
+                            title="Search by voice" aria-label="Search by voice">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
@@ -184,7 +196,7 @@
                     <div class="relative flex-shrink-0">
                         <button id="sortDropdownBtn" type="button"
                             class="w-full sm:w-48 bg-white border border-[#D5CFC3] px-4 py-2.5 rounded-lg text-sm font-manrope text-roseva-text/80 flex items-center justify-between gap-2.5 shadow-sm hover:border-roseva-plum focus:outline-none transition-colors">
-                            <span id="selectedSortLabel" class="font-medium text-roseva-text/90">Sort by</span>
+                            <span id="selectedSortLabel" class="font-medium text-roseva-text/90">Most Relevant</span>
                             <svg class="w-4 h-4 text-roseva-text/60 transition-transform duration-200" id="sortArrow"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -196,9 +208,9 @@
                         <div id="sortDropdownMenu"
                             class="dropdown-menu hidden absolute right-0 mt-1.5 w-48 bg-[#FFFAF0] rounded-xl shadow-xl border border-[#7A2E47]/15 z-40 overflow-hidden py-1 backdrop-blur-md">
                             <div class="flex flex-col font-manrope text-sm text-roseva-text">
-                                <button type="button" onclick="selectSortOption('Most Popular')"
+                                <button type="button" onclick="selectSortOption('Most Relevant')"
                                     class="px-4 py-2.5 hover:bg-[#7A2E47]/10 hover:text-roseva-plum transition-colors text-left focus:outline-none font-medium">
-                                    Most Popular
+                                    Most Relevant
                                 </button>
                                 <button type="button" onclick="selectSortOption('Price: low to high')"
                                     class="px-4 py-2.5 hover:bg-[#7A2E47]/10 hover:text-roseva-plum transition-colors text-left focus:outline-none border-t border-[#7A2E47]/10 font-medium">
@@ -228,103 +240,63 @@
                         </h2>
 
                         <!-- Category List with Numbers -->
-                        <ul class="space-y-3 font-quicksand text-sm text-roseva-text/85">
-                            <li
+                        <ul id="productCategoryList" class="space-y-3 font-quicksand text-sm text-roseva-text/85">
+                            <li onclick="selectCategoryFilter('All Products', this)"
+                                class="flex items-center justify-between cursor-pointer text-roseva-plum font-semibold py-0.5 transition-colors">
+                                <span>All Products</span>
+                                <span class="font-medium text-roseva-plum">12</span>
+                            </li>
+                            <li onclick="selectCategoryFilter('Moisturizer', this)"
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Moisturizer</span>
+                                <span class="font-medium text-roseva-text/60">4</span>
+                            </li>
+                            <li onclick="selectCategoryFilter('Serum', this)"
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Serum</span>
+                                <span class="font-medium text-roseva-text/60">4</span>
+                            </li>
+                            <li onclick="selectCategoryFilter('Lotion', this)"
+                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
+                                <span>Lotion</span>
+                                <span class="font-medium text-roseva-text/60">4</span>
+                            </li>
+                            <li onclick="selectCategoryFilter('Cleanser', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Cleanser</span>
                                 <span class="font-medium text-roseva-text/60">25</span>
                             </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Face Masks', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Face Masks</span>
                                 <span class="font-medium text-roseva-text/60">60</span>
                             </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Sunscreen', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Sunscreen</span>
                                 <span class="font-medium text-roseva-text/60">10</span>
                             </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Moisturizer</span>
-                                <span class="font-medium text-roseva-text/60">42</span>
-                            </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Facewash', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Facewash</span>
                                 <span class="font-medium text-roseva-text/60">35</span>
                             </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Serum</span>
-                                <span class="font-medium text-roseva-text/60">60</span>
-                            </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Lip Balm', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Lip Balm</span>
                                 <span class="font-medium text-roseva-text/60">10</span>
                             </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer text-roseva-plum font-semibold py-0.5">
-                                <span>Facial Wipes</span>
-                                <span class="font-medium text-roseva-plum">42</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Spot Remover</span>
-                                <span class="font-medium text-roseva-text/60">35</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Scrubs &amp; Exfoliators</span>
-                                <span class="font-medium text-roseva-text/60">60</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Cleanser</span>
-                                <span class="font-medium text-roseva-text/60">25</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Face Masks</span>
-                                <span class="font-medium text-roseva-text/60">60</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Sunscreen</span>
-                                <span class="font-medium text-roseva-text/60">10</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Moisturizer</span>
-                                <span class="font-medium text-roseva-text/60">42</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Facewash</span>
-                                <span class="font-medium text-roseva-text/60">35</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Serum</span>
-                                <span class="font-medium text-roseva-text/60">60</span>
-                            </li>
-                            <li
-                                class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
-                                <span>Lip Balm</span>
-                                <span class="font-medium text-roseva-text/60">10</span>
-                            </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Facial Wipes', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Facial Wipes</span>
                                 <span class="font-medium text-roseva-text/60">42</span>
                             </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Spot Remover', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Spot Remover</span>
                                 <span class="font-medium text-roseva-text/60">35</span>
                             </li>
-                            <li
+                            <li onclick="selectCategoryFilter('Scrubs & Exfoliators', this)"
                                 class="flex items-center justify-between cursor-pointer hover:text-roseva-plum transition-colors py-0.5">
                                 <span>Scrubs &amp; Exfoliators</span>
                                 <span class="font-medium text-roseva-text/60">60</span>
@@ -336,11 +308,37 @@
 
                 <!-- RIGHT SECTION: 12 PRODUCT GRID -->
                 <div class="lg:col-span-9">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                        <!-- Empty State when No Search/Filter Results Found -->
+                        <div id="noProductsFound"
+                            class="hidden col-span-full py-16 px-6 text-center bg-white/60 border border-[#EBE3D7] rounded-xl shadow-sm backdrop-blur-sm">
+                            <div
+                                class="w-14 h-14 mx-auto mb-4 rounded-full bg-[#7A2E47]/10 flex items-center justify-center text-roseva-plum shadow-inner">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-oranienbaum text-2xl text-roseva-plum mb-2">No Formulations Found</h3>
+                            <p class="font-quicksand text-sm text-roseva-text/70 max-w-md mx-auto mb-6">
+                                We couldn't find any products matching your search term. Try searching for
+                                something else.
+                            </p>
+                            <button type="button" onclick="clearProductSearch()"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 bg-roseva-plum text-white font-manrope text-xs font-semibold uppercase tracking-wider rounded-lg shadow-md hover:bg-[#100C08] transition-all active:scale-95 focus:outline-none">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                    </path>
+                                </svg>
+                                <span>Reset &amp; View All Products</span>
+                            </button>
+                        </div>
 
                         <!-- Product 1: Roséva Hydro-Boost -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Hydro-Boost" data-tag="Moisturizer" data-price="20">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -408,8 +406,8 @@
                         </div>
 
                         <!-- Product 2: Roséva Glow Restore -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Glow Restore" data-tag="Lotion" data-price="35">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -477,8 +475,8 @@
                         </div>
 
                         <!-- Product 3: Roséva Skin Renewal -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Skin Renewal" data-tag="Anti-aging Serum" data-price="40">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -546,8 +544,8 @@
                         </div>
 
                         <!-- Product 4: Roséva Glow Restore -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Glow Restore" data-tag="Lotion" data-price="35">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -615,8 +613,8 @@
                         </div>
 
                         <!-- Product 5: Roséva Skin Renewal -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Skin Renewal" data-tag="Anti-aging Serum" data-price="40">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -684,8 +682,8 @@
                         </div>
 
                         <!-- Product 6: Roséva Hydro-Boost -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Hydro-Boost" data-tag="Moisturizer" data-price="20">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -753,8 +751,8 @@
                         </div>
 
                         <!-- Product 7: Roséva Hydro-Boost -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Hydro-Boost" data-tag="Moisturizer" data-price="20">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -822,8 +820,8 @@
                         </div>
 
                         <!-- Product 8: Roséva Glow Restore -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Glow Restore" data-tag="Lotion" data-price="35">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -891,8 +889,8 @@
                         </div>
 
                         <!-- Product 9: Roséva Skin Renewal -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Skin Renewal" data-tag="Anti-aging Serum" data-price="40">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -960,8 +958,8 @@
                         </div>
 
                         <!-- Product 10: Roséva Glow Restore -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Glow Restore" data-tag="Lotion" data-price="35">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -1029,8 +1027,8 @@
                         </div>
 
                         <!-- Product 11: Roséva Skin Renewal -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Skin Renewal" data-tag="Anti-aging Serum" data-price="40">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -1098,8 +1096,8 @@
                         </div>
 
                         <!-- Product 12: Roséva Hydro-Boost -->
-                        <div
-                            class="bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                        <div class="product-card bg-roseva-card rounded-md border border-[#EBE3D7] p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+                            data-name="Roséva Hydro-Boost" data-tag="Moisturizer" data-price="20">
 
                             <!-- Image Area with Frosted Glassmorphism Hover Overlay -->
                             <div
@@ -1177,7 +1175,7 @@
 
                         <!-- Left: Total Items Count -->
                         <div class="font-manrope text-sm text-roseva-text/70 font-medium">
-                            Total <span class="font-semibold text-roseva-text">48</span> items
+                            Total <span id="totalItemsCount" class="font-semibold text-roseva-text">12</span> items
                         </div>
 
                         <!-- Center: Dynamic Pagination Buttons -->

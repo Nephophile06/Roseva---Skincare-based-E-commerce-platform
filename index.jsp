@@ -421,7 +421,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-12 sm:gap-y-16">
 
                     <!-- Category 1: Moisturizer -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Moisturizer" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/moisturizer.png" alt="Moisturizer Collection"
@@ -431,10 +431,10 @@
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
                             Moisturizer
                         </h3>
-                    </div>
+                    </a>
 
                     <!-- Category 2: Spot Remover -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Spot+Remover" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/spot remover.png" alt="Spot Remover Collection"
@@ -444,10 +444,10 @@
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
                             Spot Remover
                         </h3>
-                    </div>
+                    </a>
 
                     <!-- Category 3: Cleanser -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Cleanser" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/cleanser.png" alt="Cleanser Collection"
@@ -457,10 +457,10 @@
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
                             Cleanser
                         </h3>
-                    </div>
+                    </a>
 
                     <!-- Category 4: Facewash -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Facewash" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/facewash.png" alt="Facewash Collection"
@@ -470,10 +470,10 @@
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
                             Facewash
                         </h3>
-                    </div>
+                    </a>
 
                     <!-- Category 5: Scrubs & Exfoliates -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Scrubs+%26+Exfoliators" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/scrubs & exfoliates.png" alt="Scrubs & Exfoliates Collection"
@@ -481,12 +481,12 @@
                         </div>
                         <h3
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
-                            Scrubs & Exfoliates
+                            Scrubs &amp; Exfoliates
                         </h3>
-                    </div>
+                    </a>
 
                     <!-- Category 6: Serum -->
-                    <div class="flex flex-col items-center group cursor-pointer">
+                    <a href="products.jsp?category=Serum" class="flex flex-col items-center group cursor-pointer block focus:outline-none">
                         <div
                             class="w-full aspect-[16/10] sm:aspect-[16/9] rounded-md overflow-hidden bg-[#F5EFE6] border border-[#EAE2D5] shadow-sm group-hover:shadow-md transition-all duration-300">
                             <img src="assets/serum.png" alt="Serum Collection"
@@ -496,7 +496,7 @@
                             class="font-oranienbaum text-2xl sm:text-3xl text-roseva-plum mt-5 text-center group-hover:opacity-80 transition-opacity">
                             Serum
                         </h3>
-                    </div>
+                    </a>
 
                 </div>
             </section>
