@@ -179,16 +179,16 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                                 <div>
                                     <label for="district" class="block text-roseva-text/80 mb-1.5">District:</label>
-                                    <input type="text" id="district" value="dhaka"
+                                    <input type="text" id="district" placeholder="District"
                                         class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
                                 </div>
 
-                                <!-- Custom City Dropdown (Matches Image 3) -->
+                                <!-- Custom City Dropdown -->
                                 <div class="relative">
                                     <label class="block text-roseva-text/80 mb-1.5">City:</label>
                                     <button type="button" id="cityDropdownBtn"
                                         class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text flex items-center justify-between focus:outline-none focus:border-roseva-plum transition-colors shadow-sm">
-                                        <span id="selectedCityLabel" class="lowercase">dhaka</span>
+                                        <span id="selectedCityLabel" class="text-roseva-text/40">Select city</span>
                                         <svg id="cityDropdownArrow"
                                             class="w-4 h-4 text-roseva-text/60 transition-transform duration-200"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -197,7 +197,7 @@
                                         </svg>
                                     </button>
 
-                                    <!-- City Dropdown Menu (Matches list-group in Image 3) -->
+                                    <!-- City Dropdown Menu -->
                                     <div id="cityDropdownMenu"
                                         class="dropdown-menu hidden absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-[#E5E0D8] z-50 overflow-hidden">
                                         <div
@@ -232,33 +232,46 @@
                         </h2>
                         <div class="space-y-3 font-quicksand text-xs sm:text-sm mb-5">
                             <label class="flex items-center gap-3 cursor-pointer select-none">
-                                <input type="radio" name="paymentMethod" value="bkash" checked
+                                <input type="radio" name="paymentMethod" value="bkash"
+                                    onchange="handlePaymentMethodChange(this.value)"
                                     class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
                                 <span class="text-roseva-text/90 font-medium">Local Payment Method (bkash/nagad)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer select-none">
                                 <input type="radio" name="paymentMethod" value="cod"
+                                    onchange="handlePaymentMethodChange(this.value)"
                                     class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
                                 <span class="text-roseva-text/90">Cash On Delivery</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer select-none">
                                 <input type="radio" name="paymentMethod" value="card"
+                                    onchange="handlePaymentMethodChange(this.value)"
                                     class="w-4 h-4 text-roseva-plum accent-roseva-plum cursor-pointer" />
                                 <span class="text-roseva-text/90">Credit or Debit Card</span>
                             </label>
                         </div>
 
-                        <!-- Payment Card Inputs -->
-                        <div class="space-y-4 font-quicksand text-xs sm:text-sm">
-                            <input type="text" placeholder="Account Holder's Name"
-                                class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
-                            <input type="text" placeholder="Card Number"
-                                class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
-                            <div class="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="Expiry Date"
-                                    class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
-                                <input type="text" placeholder="CVC"
-                                    class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                        <!-- Payment Card Accordion (only visible when Card option is selected) -->
+                        <div id="cardDetailsAccordion" class="hidden transition-all duration-300 overflow-hidden pt-1">
+                            <div class="space-y-4 font-quicksand text-xs sm:text-sm">
+                                <div>
+                                    <input type="text" id="cardHolderName" placeholder="Account Holder's Name"
+                                        class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                                </div>
+                                <div>
+                                    <input type="text" id="cardNumber" placeholder="Card Number"
+                                        class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <input type="text" id="cardExpiry" placeholder="Expiry Date (MM/YY)"
+                                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="cardCvc" placeholder="CVC" maxlength="4"
+                                            class="w-full px-4 py-3 bg-white border border-[#D5CFC3] rounded-md text-roseva-text placeholder-roseva-text/40 focus:outline-none focus:border-roseva-plum transition-colors shadow-sm" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -317,8 +330,8 @@
 
                     <!-- Confirm Order CTA -->
                     <div class="flex justify-end">
-                        <button type="button" onclick="confirmOrder()"
-                            class="bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <button type="button" id="confirmOrderBtn" onclick="confirmOrder()" disabled
+                            class="bg-[#C4A4A4] text-white/90 font-manrope font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-sm transition-all duration-300 cursor-not-allowed">
                             Confirm Order
                         </button>
                     </div>
@@ -429,11 +442,16 @@
                 const label = document.getElementById('selectedCityLabel');
                 if (label) {
                     label.innerText = cityName.toLowerCase();
+                    label.classList.remove('text-roseva-text/40');
+                    label.classList.add('text-roseva-text', 'font-medium');
                 }
                 const cityMenu = document.getElementById('cityDropdownMenu');
                 const cityArrow = document.getElementById('cityDropdownArrow');
                 if (cityMenu) cityMenu.classList.add('hidden');
                 if (cityArrow) cityArrow.classList.remove('rotate-180');
+                if (typeof validateCheckoutForm === 'function') {
+                    validateCheckoutForm();
+                }
             }
         </script>
     </body>

@@ -866,28 +866,7 @@ function renderCheckoutItems() {
         return;
     }
 
-    // Auto-populate user contact & delivery info if present and fields are empty
-    const emailInput = document.getElementById('checkoutEmail');
-    const firstNameInput = document.getElementById('firstName');
-    const lastNameInput = document.getElementById('lastName');
-    const phoneInput = document.getElementById('checkoutPhone');
-
-    if (user.email && emailInput && !emailInput.value) {
-        emailInput.value = user.email;
-    }
-    if (user.name) {
-        const parts = user.name.trim().split(/\s+/);
-        if (firstNameInput && !firstNameInput.value) {
-            firstNameInput.value = parts[0] || '';
-        }
-        if (lastNameInput && !lastNameInput.value) {
-            lastNameInput.value = parts.slice(1).join(' ') || '';
-        }
-    }
-    if (user.phone && phoneInput && !phoneInput.value) {
-        phoneInput.value = user.phone;
-    }
-
+    // By default, no fields or payment methods are pre-filled or pre-selected
     const countLabel = document.getElementById('checkoutItemsCountLabel');
     const subtotalLabel = document.getElementById('checkoutSubtotalAmount');
     const shippingLabel = document.getElementById('checkoutShippingAmount');
@@ -964,6 +943,107 @@ function renderCheckoutItems() {
     if (shippingLabel) shippingLabel.innerText = '$' + shipping;
     if (discountLabel) discountLabel.innerText = '$' + discount;
     if (totalLabel) totalLabel.innerText = '$' + grandTotal;
+
+    // Attach listeners for checkout validation
+    initCheckoutFormListeners();
+}
+
+function handlePaymentMethodChange(method) {
+    const cardAccordion = document.getElementById('cardDetailsAccordion');
+    if (cardAccordion) {
+        if (method === 'card') {
+            cardAccordion.classList.remove('hidden');
+        } else {
+            cardAccordion.classList.add('hidden');
+        }
+    }
+    validateCheckoutForm();
+}
+
+function validateCheckoutForm() {
+    const emailInput = document.getElementById('checkoutEmail');
+    const phoneInput = document.getElementById('checkoutPhone');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const streetAddressInput = document.getElementById('streetAddress');
+    const districtInput = document.getElementById('district');
+    const cityLabel = document.getElementById('selectedCityLabel');
+    const checkedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+    const confirmBtn = document.getElementById('confirmOrderBtn');
+
+    if (!confirmBtn) return false;
+
+    const email = emailInput ? emailInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+    const lastName = lastNameInput ? lastNameInput.value.trim() : '';
+    const streetAddress = streetAddressInput ? streetAddressInput.value.trim() : '';
+    const district = districtInput ? districtInput.value.trim() : '';
+    const city = cityLabel ? cityLabel.innerText.trim().toLowerCase() : '';
+    const isCitySelected = city && city !== 'select city' && city !== 'select';
+
+    let isValid = (
+        email.length > 0 &&
+        phone.length > 0 &&
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        streetAddress.length > 0 &&
+        district.length > 0 &&
+        isCitySelected &&
+        checkedPayment !== null
+    );
+
+    // If Card payment is selected, card fields are also required
+    if (isValid && checkedPayment && checkedPayment.value === 'card') {
+        const cardHolder = document.getElementById('cardHolderName');
+        const cardNumber = document.getElementById('cardNumber');
+        const cardExpiry = document.getElementById('cardExpiry');
+        const cardCvc = document.getElementById('cardCvc');
+
+        const holderVal = cardHolder ? cardHolder.value.trim() : '';
+        const numberVal = cardNumber ? cardNumber.value.trim() : '';
+        const expiryVal = cardExpiry ? cardExpiry.value.trim() : '';
+        const cvcVal = cardCvc ? cardCvc.value.trim() : '';
+
+        if (!holderVal || !numberVal || !expiryVal || !cvcVal) {
+            isValid = false;
+        }
+    }
+
+    if (isValid) {
+        confirmBtn.disabled = false;
+        confirmBtn.className = 'bg-roseva-plum hover:bg-[#100C08] text-white font-manrope font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer';
+    } else {
+        confirmBtn.disabled = true;
+        confirmBtn.className = 'bg-[#C4A4A4] text-white/90 font-manrope font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-sm transition-all duration-300 cursor-not-allowed';
+    }
+
+    return isValid;
+}
+
+function initCheckoutFormListeners() {
+    const inputIds = [
+        'checkoutEmail', 'checkoutPhone', 'firstName', 'lastName',
+        'streetAddress', 'district', 'cardHolderName', 'cardNumber',
+        'cardExpiry', 'cardCvc'
+    ];
+
+    inputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', validateCheckoutForm);
+            el.addEventListener('change', validateCheckoutForm);
+        }
+    });
+
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            handlePaymentMethodChange(radio.value);
+        });
+    });
+
+    validateCheckoutForm();
 }
 
 function confirmOrder() {
@@ -971,6 +1051,11 @@ function confirmOrder() {
     if (!user) {
         alert('Please log in to confirm your order.');
         window.location.href = 'cart.jsp?loginRequired=1';
+        return;
+    }
+
+    if (!validateCheckoutForm()) {
+        alert('Please fill out all required fields before confirming your order.');
         return;
     }
 
@@ -999,6 +1084,8 @@ function confirmOrder() {
 
 window.renderCheckoutItems = renderCheckoutItems;
 window.confirmOrder = confirmOrder;
+window.handlePaymentMethodChange = handlePaymentMethodChange;
+window.validateCheckoutForm = validateCheckoutForm;
 
 // Initialize checkout items on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
