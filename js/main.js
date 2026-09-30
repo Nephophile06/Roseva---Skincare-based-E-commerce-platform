@@ -20,30 +20,6 @@ const PRODUCT_CATALOG = {
     'Roséva Cloud Drench Mist': { price: 52, size: '120ml', image: 'assets/cloud drench.png' }
 };
 
-// Handle guest cart reset on reload / refresh
-function initGuestCartReloadDetection() {
-    const user = getLoggedInUser();
-    if (!user) {
-        try {
-            let isReload = false;
-            if (window.performance) {
-                const nav = performance.getEntriesByType && performance.getEntriesByType('navigation');
-                if (nav && nav.length > 0) {
-                    isReload = (nav[0].type === 'reload');
-                } else if (performance.navigation) {
-                    isReload = (performance.navigation.type === 1);
-                }
-            }
-            if (isReload) {
-                sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
-            }
-        } catch (e) {
-            console.error('Error in reload detection:', e);
-        }
-    }
-}
-initGuestCartReloadDetection();
-
 function getUserCartKey(user) {
     if (!user) user = getLoggedInUser();
     if (!user) return null;
@@ -58,7 +34,16 @@ function getCartItems() {
             const data = localStorage.getItem(key);
             return data ? JSON.parse(data) : [];
         } else {
-            const data = sessionStorage.getItem(GUEST_CART_STORAGE_KEY);
+            let data = localStorage.getItem(GUEST_CART_STORAGE_KEY);
+            // Backward-compatibility: migrate from sessionStorage if present
+            if (!data) {
+                const oldSessionData = sessionStorage.getItem(GUEST_CART_STORAGE_KEY);
+                if (oldSessionData) {
+                    localStorage.setItem(GUEST_CART_STORAGE_KEY, oldSessionData);
+                    sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
+                    data = oldSessionData;
+                }
+            }
             return data ? JSON.parse(data) : [];
         }
     } catch (e) {
@@ -74,7 +59,7 @@ function saveCartItems(items) {
             const key = getUserCartKey(user);
             localStorage.setItem(key, JSON.stringify(items));
         } else {
-            sessionStorage.setItem(GUEST_CART_STORAGE_KEY, JSON.stringify(items));
+            localStorage.setItem(GUEST_CART_STORAGE_KEY, JSON.stringify(items));
         }
     } catch (e) {
         console.error('Error saving cart items:', e);
@@ -96,9 +81,9 @@ function setLoggedInUser(user) {
     try {
         localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
 
-        // Merge any temporary guest cart into logged in user's cart
+        // Merge any temporary guest cart from localStorage into logged in user's cart
         try {
-            const guestData = sessionStorage.getItem(GUEST_CART_STORAGE_KEY);
+            const guestData = localStorage.getItem(GUEST_CART_STORAGE_KEY);
             if (guestData) {
                 const guestItems = JSON.parse(guestData);
                 if (Array.isArray(guestItems) && guestItems.length > 0) {
@@ -114,7 +99,7 @@ function setLoggedInUser(user) {
                     });
                     localStorage.setItem(userKey, JSON.stringify(userCart));
                 }
-                sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
+                localStorage.removeItem(GUEST_CART_STORAGE_KEY);
             }
         } catch (mergeErr) {
             console.error('Error merging guest cart:', mergeErr);
@@ -136,8 +121,6 @@ function setLoggedInUser(user) {
 
 function logoutUser() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
-    // Remove guest cart so logout view is clean empty cart
-    sessionStorage.removeItem(GUEST_CART_STORAGE_KEY);
     updateAuthUI();
     updateCartBadge();
     if (window.location.pathname.includes('cart.jsp')) {
