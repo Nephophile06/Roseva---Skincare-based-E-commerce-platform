@@ -10,6 +10,7 @@ tailwind.config = {
                 'roseva-wine-light': '#8f3955',
                 'roseva-card': '#FFFFFF',
                 'roseva-box': '#EFEBE9',
+                'roseva-blue': '#82C8E5',
             },
             fontFamily: {
                 'oranienbaum': ['Oranienbaum', 'serif'],
